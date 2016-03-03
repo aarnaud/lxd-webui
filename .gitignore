@@ -1,0 +1,5 @@
+app/*.js
+app/*.map
+.idea/
+node_modules/
+typings/

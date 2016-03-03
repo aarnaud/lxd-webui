@@ -1,0 +1,8 @@
+<div *ngIf="container">
+    <h2>{{container.name}}</h2>
+    <div>
+        <label>name: </label>
+        <input [(ngModel)]="container.name" placeholder="name"/>
+    </div>
+</div>
+<button (click)="goBack()">Back</button>
