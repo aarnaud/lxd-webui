@@ -1,0 +1,7 @@
+<ul class="containers">
+    <li *ngFor="#container of containers"
+        (click)="onSelect(container)"
+        [class.selected]="container === selectedContainer">
+        {{container.name}} ( {{container.status}} )
+    </li>
+</ul>

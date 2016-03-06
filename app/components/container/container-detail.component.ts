@@ -2,11 +2,11 @@ import {Component, OnInit} from 'angular2/core';
 import {RouteParams} from 'angular2/router';
 
 import {Container} from './container';
-import { ContainerService } from './container.service';
+import { ContainerService } from '../../services/container.service';
 
 @Component({
     selector: 'container-detail',
-    templateUrl: 'app/container-detail.component.html',
+    templateUrl: 'app/components/container/container-detail.component.html',
 })
 export class ContainerDetailComponent implements OnInit{
     container: Container;

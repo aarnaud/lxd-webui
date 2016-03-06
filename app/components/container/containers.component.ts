@@ -2,20 +2,12 @@ import {Component, OnInit} from 'angular2/core';
 import {Router} from 'angular2/router';
 import {Container} from './container';
 import {ContainerDetailComponent} from './container-detail.component';
-import {ContainerService} from './container.service';
+import {ContainerService} from '../../services/container.service';
 import {Observable}     from 'rxjs/Observable';
 
 @Component({
     selector: 'lxd-containers',
-    template: `
-        <ul class="containers">
-            <li *ngFor="#container of containers"
-                (click)="onSelect(container)"
-                [class.selected]="container === selectedContainer">
-                {{container.name}} ( {{container.status}} )
-            </li>
-        </ul>
-    `,
+    templateUrl: 'app/components/container/containers.component.html',
 })
 export class ContainersComponent implements OnInit {
     ngOnInit():any {

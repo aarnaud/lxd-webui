@@ -1,9 +1,11 @@
 import { Component }       from 'angular2/core';
 import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from 'angular2/router';
 import {HTTP_PROVIDERS}    from 'angular2/http';
-import { ContainerService }     from './container.service';
-import { ContainersComponent } from './containers.component';
-import { ContainerDetailComponent } from './container-detail.component';
+import { ContainerService }     from './services/container.service';
+import { ContainersComponent } from './components/container/containers.component';
+import { ContainerDetailComponent } from './components/container/container-detail.component';
+import {RouteDefinition} from "angular2/router";
+
 @Component({
     selector: 'lxd-app',
     template: `
@@ -22,13 +24,13 @@ import { ContainerDetailComponent } from './container-detail.component';
 })
 
 @RouteConfig([
-    {
+    <RouteDefinition>{
         path: '/containers',
         name: 'Containers',
         component: ContainersComponent,
         useAsDefault: true
     },
-    {
+    <RouteDefinition>{
         path: '/container/:id',
         name: 'ContainerDetail',
         component: ContainerDetailComponent
