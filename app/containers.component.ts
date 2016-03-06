@@ -3,7 +3,7 @@ import {Router} from 'angular2/router';
 import {Container} from './container';
 import {ContainerDetailComponent} from './container-detail.component';
 import {ContainerService} from './container.service';
-
+import {Observable}     from 'rxjs/Observable';
 
 @Component({
     selector: 'lxd-containers',
@@ -12,18 +12,14 @@ import {ContainerService} from './container.service';
             <li *ngFor="#container of containers"
                 (click)="onSelect(container)"
                 [class.selected]="container === selectedContainer">
-                {{container.name}}
+                {{container.name}} ( {{container.status}} )
             </li>
         </ul>
-        <container-detail [container]="selectedContainer"></container-detail>
     `,
-    directives: [ContainerDetailComponent],
-
 })
 export class ContainersComponent implements OnInit {
     ngOnInit():any {
         this.getContainers();
-        return undefined;
     }
     public title = 'LXD WebUI';
     public containers: Container[];
@@ -41,7 +37,7 @@ export class ContainersComponent implements OnInit {
     }
 
     private getContainers():void {
-        this._containerService.getContainers().then(containers => this.containers = containers);
-        console.log(this.containers)
+        this._containerService.getContainers()
+            .subscribe((forkJoin: Observable) => forkJoin.subscribe((containers: Container[]) => this.containers = containers));
     }
 }

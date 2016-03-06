@@ -7,60 +7,46 @@ import {Container} from './container'
 export class ContainerService {
     constructor (private http: Http) {}
 
-    private _lxdServer = 'https://127.0.0.1:8443';  // URL to web api
-
-    getContainers() {
-        // Async with promise
-        var containersUrl = this.http.get(this._lxdServer+"/1.0/containers").toPromise()
-            .then(function (data) {
-                if(data.json().status_code == 200){
-                    return data.json().metadata;
-                }
-            });
-
-        var self = this;
-        return containersUrl.then(function(urls){
-            return urls.map(function(url){
-                return self._get(self._lxdServer+url)
-            })
-        });
-
-        return Promise.resolve(CONTAINERS)
-
-    }
-    getContainer(id: string) {
-        return Promise.resolve(CONTAINERS).then(
-            heroes => heroes.filter(container => container.name === id)[0]
-        );
-    }
+    private _lxdServer = 'http://192.168.57.75';  // URL to web api
+    private _apiVersion = '1.0';  // URL to web api
 
     private handleError (error: Response) {
         // in a real world app, we may send the error to some remote logging infrastructure
         // instead of just logging it to the console
-        console.error(error);
+        console.error(error.json());
         return Observable.throw(error.json().error || 'Server error');
     }
 
-    _get(url){
-        return this.http.get(url).toPromise()
-            .then(function (data) {
-                if(data.json().status_code == 200){
-                    return data.json().metadata
-                }
-            })
+    getContainers(): Observable {
+        let observableBatch = [];
+        return this.http.get(this._lxdServer+"/"+this._apiVersion+"/containers")
+            .map(res => {
+                res.json()['metadata'].forEach((url) => observableBatch.push(this._get(url)));
+                return Observable.forkJoin(observableBatch);
+            }).catch(this.handleError);
+
+    }
+    getContainer(id: string): Observable {
+        return this._get("/"+this._apiVersion+"/containers/"+id);
+    }
+
+    _get(url): Observable {
+        return this.http.get(this._lxdServer+url)
+            .map((res: Response) => <Container[]> res.json()['metadata'])
+            .catch(this.handleError);
+    }
+
+    setState(id:string, state: string){
+        return this.http.put(this._lxdServer+"/"+this._apiVersion+"/containers/"+id+"/state", JSON.stringify({
+            "action": state,        // State change action (stop, start, restart, freeze or unfreeze)
+            "timeout": 30,          // A timeout after which the state change is considered as failed
+            "force": true,          // Force the state change (currently only valid for stop and restart where it means killing the container)
+            "stateful": false        // Whether to store or restore runtime state before stopping or startiong (only valid for stop and start, defaults to false)
+        })).catch(this.handleError);
+    }
+
+    delete(id:string){
+        return this.http.delete(this._lxdServer+"/"+this._apiVersion+"/containers/"+id)
+            .catch(this.handleError);
     }
 }
-
-
-var CONTAINERS: Container[] = [
-    { "name": "Mr. Nice" },
-    { "name": "Narco" },
-    { "name": "Bombasto" },
-    { "name": "Celeritas" },
-    { "name": "Magneta" },
-    { "name": "RubberMan" },
-    { "name": "Dynama" },
-    { "name": "Dr IQ" },
-    { "name": "Magma" },
-    { "name": "Tornado" }
-];

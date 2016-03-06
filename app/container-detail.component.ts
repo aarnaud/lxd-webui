@@ -19,7 +19,23 @@ export class ContainerDetailComponent implements OnInit{
     ngOnInit():any {
         let id = this._routeParams.get('id');
         this._containerService.getContainer(id)
-            .then(container => this.container = container);
+            .subscribe(container => this.container = container);
+    }
+
+    stopAction() {
+        this._containerService.setState(this.container.name, 'stop').subscribe()
+    }
+
+    startAction() {
+        this._containerService.setState(this.container.name, 'start').subscribe()
+    }
+
+    restartAction() {
+        this._containerService.setState(this.container.name, 'restart').subscribe()
+    }
+
+    deleteAction() {
+        this._containerService.delete(this.container.name).subscribe()
     }
 
     goBack() {

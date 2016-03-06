@@ -1,8 +1,15 @@
 <div *ngIf="container">
     <h2>{{container.name}}</h2>
     <div>
-        <label>name: </label>
-        <input [(ngModel)]="container.name" placeholder="name"/>
+        <span>Arch: {{container.architecture}}</span>
+        <span>Status: {{container.status}}</span>
+    </div>
+    <div>
+        <button (click)="startAction()">Start</button>
+        <button (click)="stopAction()">Stop</button>
+        <button (click)="restartAction()">Restart</button>
+        <button (click)="deleteAction()">Delete</button>
+        <!--<input [(ngModel)]="container.name" placeholder="name"/>-->
     </div>
 </div>
 <button (click)="goBack()">Back</button>
