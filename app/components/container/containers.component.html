@@ -2,6 +2,6 @@
     <li class="list-group-item" *ngFor="#container of containers"
         (click)="onSelect(container)"
         [class.selected]="container === selectedContainer">
-        {{container.name}} <span class="badge">{{container.status}}</span>
+        {{container.name}} <span [class.label-success]="isRunning(container)" class="pull-right label label-default">{{container.status}}</span>
     </li>
 </ul>
