@@ -7,7 +7,7 @@ import {Container} from '../components/container/container'
 export class ContainerService {
     constructor (private http: Http) {}
 
-    private _lxdServer = 'http://192.168.57.75';  // URL to web api
+    private _lxdServer = 'https://127.0.0.1:8443';  // URL to web api
     private _apiVersion = '1.0';  // URL to web api
 
     private handleError (error: Response) {
