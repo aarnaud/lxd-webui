@@ -1,7 +1,7 @@
-<ul class="containers">
-    <li *ngFor="#container of containers"
+<ul class="list-group containers">
+    <li class="list-group-item" *ngFor="#container of containers"
         (click)="onSelect(container)"
         [class.selected]="container === selectedContainer">
-        {{container.name}} ( {{container.status}} )
+        {{container.name}} <span class="badge">{{container.status}}</span>
     </li>
 </ul>

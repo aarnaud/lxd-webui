@@ -1,3 +1,6 @@
+<button class="btn btn-default" (click)="goBack()">
+    <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
+</button>
 <div *ngIf="container">
     <h2>{{container.name}}</h2>
     <div>
@@ -5,11 +8,18 @@
         <span>Status: {{container.status}}</span>
     </div>
     <div>
-        <button (click)="startAction()">Start</button>
-        <button (click)="stopAction()">Stop</button>
-        <button (click)="restartAction()">Restart</button>
-        <button (click)="deleteAction()">Delete</button>
+        <button class="btn btn-success" (click)="startAction()">
+            <span class="glyphicon glyphicon-play" aria-hidden="true"> Start</span>
+        </button>
+        <button class="btn btn-default" (click)="stopAction()">
+            <span class="glyphicon glyphicon-stop" aria-hidden="true"> Stop</span>
+        </button>
+        <button class="btn btn-default" (click)="restartAction()">
+            <span class="glyphicon glyphicon-repeat" aria-hidden="true"> Restart</span>
+        </button>
+        <button class="btn btn-danger" (click)="deleteAction()">
+            <span class="glyphicon glyphicon-remove" aria-hidden="true"> Delete</span>
+        </button>
         <!--<input [(ngModel)]="container.name" placeholder="name"/>-->
     </div>
 </div>
-<button (click)="goBack()">Back</button>
