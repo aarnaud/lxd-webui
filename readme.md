@@ -6,7 +6,7 @@
 lxc config set core.https_address [::]:8443
 ```
 
-## Add CORS settings on LXD
+## Add CORS settings on LXD (Since LXD 2.0.0.rc2)
 
 ```bash
 lxc config set core.https_allowed_origin "*"
@@ -41,7 +41,7 @@ openssl pkcs12 -keypbe PBE-SHA1-3DES -certpbe PBE-SHA1-3DES -export -in lxd-webu
     - [Google Chrome on Windows](https://www.comodo.com/support/products/authentication_certs/setup/win_chrome.php?key5sk1=649f7696ddcd15b926ed0862b303a6e7b4dd8204) 
     - [Firefox](http://www.digi-sign.com/support/client%20certificates/import%20firefox)
     
-- Authorize the certificate on LXD.
+- Authorize the certificate on LXD server.
 ```bash
 lxc config trust add lxd-webui.crt
 ```
