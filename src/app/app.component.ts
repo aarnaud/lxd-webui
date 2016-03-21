@@ -8,7 +8,7 @@ import {RouteDefinition} from "angular2/router";
 
 @Component({
     selector: 'lxd-app',
-    templateUrl: 'app/app.component.html',
+    templateUrl: 'assets/templates/app.component.html',
     directives: [
         ROUTER_DIRECTIVES
     ],

@@ -6,7 +6,7 @@ import { ContainerService } from '../../services/container.service';
 
 @Component({
     selector: 'container-detail',
-    templateUrl: 'app/components/container/container-detail.component.html',
+    templateUrl: 'assets/templates/container-detail.component.html',
 })
 export class ContainerDetailComponent implements OnInit{
     container: Container;

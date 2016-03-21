@@ -7,7 +7,7 @@ import {Observable}     from 'rxjs/Observable';
 
 @Component({
     selector: 'lxd-containers',
-    templateUrl: 'app/components/container/containers.component.html',
+    templateUrl: 'assets/templates/containers.component.html',
 })
 export class ContainersComponent implements OnInit {
     ngOnInit():any {
