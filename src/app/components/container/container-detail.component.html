@@ -1,5 +1,5 @@
-<button class="btn btn-default" (click)="goBack()">
-    <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
+<button md-raised-button (click)="goBack()">
+    <i class="material-icons md-24">arrow_back</i>
 </button>
 <div *ngIf="container">
     <h2>{{container.name}}</h2>
@@ -8,17 +8,17 @@
         <span>Status: {{container.status}}</span>
     </div>
     <div>
-        <button class="btn btn-success" (click)="startAction()">
-            <span class="glyphicon glyphicon-play" aria-hidden="true"> Start</span>
+        <button md-raised-button class="md-primary" (click)="startAction()">
+            <i class="material-icons md-24">play_arrow</i>
         </button>
-        <button class="btn btn-default" (click)="stopAction()">
-            <span class="glyphicon glyphicon-stop" aria-hidden="true"> Stop</span>
+        <button md-raised-button class="md-primary" (click)="stopAction()">
+            <i class="material-icons md-24">stop</i>
         </button>
-        <button class="btn btn-default" (click)="restartAction()">
-            <span class="glyphicon glyphicon-repeat" aria-hidden="true"> Restart</span>
+        <button md-raised-button class="md-primary" (click)="restartAction()">
+            <i class="material-icons md-24">refresh</i>
         </button>
-        <button class="btn btn-danger" (click)="deleteAction()">
-            <span class="glyphicon glyphicon-remove" aria-hidden="true"> Delete</span>
+        <button md-raised-button class="md-accent" (click)="deleteAction()">
+            <i class="material-icons md-24">delete</i>
         </button>
         <!--<input [(ngModel)]="container.name" placeholder="name"/>-->
     </div>

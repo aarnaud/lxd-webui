@@ -5,6 +5,8 @@ import { ContainerService }     from './services/container.service';
 import { ContainersComponent } from './components/container/containers.component';
 import { ContainerDetailComponent } from './components/container/container-detail.component';
 import {RouteDefinition} from "angular2/router";
+import {MdButton} from "@angular2-material/button";
+
 
 @Component({
     selector: 'lxd-app',
@@ -15,6 +17,7 @@ import {RouteDefinition} from "angular2/router";
   `,
     directives: [
         ROUTER_DIRECTIVES,
+        MdButton
     ],
     providers: [
         HTTP_PROVIDERS,
