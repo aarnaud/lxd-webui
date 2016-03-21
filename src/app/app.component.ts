@@ -5,19 +5,12 @@ import { ContainerService }     from './services/container.service';
 import { ContainersComponent } from './components/container/containers.component';
 import { ContainerDetailComponent } from './components/container/container-detail.component';
 import {RouteDefinition} from "angular2/router";
-import {MdButton} from "@angular2-material/button";
-
 
 @Component({
     selector: 'lxd-app',
-    template: `
-    <h1>{{title}}</h1>
-    <a [routerLink]="['Containers']">Containers</a>
-    <router-outlet></router-outlet>
-  `,
+    templateUrl: 'app/app.component.html',
     directives: [
-        ROUTER_DIRECTIVES,
-        MdButton
+        ROUTER_DIRECTIVES
     ],
     providers: [
         HTTP_PROVIDERS,

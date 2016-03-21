@@ -1,6 +1,3 @@
-<button md-raised-button (click)="goBack()">
-    <i class="material-icons md-24">arrow_back</i>
-</button>
 <div *ngIf="container">
     <h2>{{container.name}}</h2>
     <div>
@@ -8,16 +5,16 @@
         <span>Status: {{container.status}}</span>
     </div>
     <div>
-        <button md-raised-button class="md-primary" (click)="startAction()">
+        <button class="waves-effect waves-light btn" (click)="startAction()">
             <i class="material-icons md-24">play_arrow</i>
         </button>
-        <button md-raised-button class="md-primary" (click)="stopAction()">
+        <button class="waves-effect waves-light btn" (click)="stopAction()">
             <i class="material-icons md-24">stop</i>
         </button>
-        <button md-raised-button class="md-primary" (click)="restartAction()">
+        <button class="waves-effect waves-light btn" (click)="restartAction()">
             <i class="material-icons md-24">refresh</i>
         </button>
-        <button md-raised-button class="md-accent" (click)="deleteAction()">
+        <button class="waves-effect waves-light btn" (click)="deleteAction()">
             <i class="material-icons md-24">delete</i>
         </button>
         <!--<input [(ngModel)]="container.name" placeholder="name"/>-->

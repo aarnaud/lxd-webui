@@ -1,7 +1,17 @@
-<ul class="list-group containers">
-    <li class="list-group-item" *ngFor="#container of containers"
+<table class="bordered highlight responsive-table">
+    <thead>
+    <tr>
+        <th data-field="name">Name</th>
+        <th data-field="status">Status</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr *ngFor="#container of containers"
         (click)="onSelect(container)"
         [class.selected]="container === selectedContainer">
-        {{container.name}} <span [class.label-success]="isRunning(container)" class="pull-right label label-default">{{container.status}}</span>
-    </li>
-</ul>
+        <td>{{container.name}}</td>
+        <td>{{container.status}}</td>
+    </tr>
+    </tbody>
+</table>

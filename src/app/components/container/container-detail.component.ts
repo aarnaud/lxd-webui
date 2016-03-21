@@ -37,8 +37,4 @@ export class ContainerDetailComponent implements OnInit{
     deleteAction() {
         this._containerService.delete(this.container.name).subscribe()
     }
-
-    goBack() {
-        window.history.back();
-    }
 }
