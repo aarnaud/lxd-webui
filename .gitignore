@@ -1,7 +1,8 @@
-app/*.js
-app/**/*.js
-app/*.map
-app/**/*.map
+src/*.js
+src/**/*.js
+src/*.map
+src/**/*.map
+dist/
 .idea/
 node_modules/
 typings/

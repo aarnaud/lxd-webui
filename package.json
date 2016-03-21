@@ -1,29 +1,35 @@
 {
   "name": "lxd-webui",
   "version": "0.0.1",
+  "main": "index.js",
+  "files": [
+    "dist",
+    "src"
+  ],
   "scripts": {
-    "start": "concurrently \"npm run tsc:w\" \"npm run lite\" ",
-    "tsc": "tsc",
-    "tsc:w": "tsc -w",
-    "lite": "lite-server",
-    "typings": "typings",
-    "postinstall": "typings install"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node_modules/.bin/webpack-dev-server --env.ENV development",
+    "build": "node_modules/.bin/webpack --env.ENV development",
+    "typings-install": "node_modules/.bin/typings install",
+    "postinstall": "npm run typings-install"
   },
-  "license": "ISC",
   "dependencies": {
-    "angular2": "2.0.0-beta.7",
-    "bootstrap": "^3.3.6",
-    "es6-promise": "^3.0.2",
-    "es6-shim": "^0.33.3",
-    "reflect-metadata": "0.1.2",
+    "angular2": "2.0.0-beta.11",
     "rxjs": "5.0.0-beta.2",
-    "systemjs": "0.19.22",
-    "zone.js": "0.5.15"
+    "zone.js": "0.6.4"
   },
   "devDependencies": {
-    "concurrently": "^2.0.0",
-    "lite-server": "^2.1.0",
-    "typescript": "^1.8.2",
-    "typings": "^0.6.8"
+    "awesome-typescript-loader": "^0.15.10",
+    "es6-promise": "^3.1.2",
+    "es6-shim": "^0.35.0",
+    "json-loader": "^0.5.4",
+    "raw-loader": "^0.5.1",
+    "reflect-metadata": "^0.1.2",
+    "ts-node": "^0.6.2",
+    "typescript": "^1.8.9",
+    "typings": "^0.7.9",
+    "webpack": "^2.1.0-beta.4",
+    "webpack-dev-server": "^2.0.0-beta",
+    "webpack-hot-middleware": "^2.6.4"
   }
 }

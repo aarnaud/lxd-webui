@@ -17,22 +17,22 @@ export class ContainerService {
         return Observable.throw(error.json().error || 'Server error');
     }
 
-    getContainers(): Observable {
+    getContainers(): Observable<Observable<Container[]>> {
         let observableBatch = [];
         return this.http.get(this._lxdServer+"/"+this._apiVersion+"/containers")
             .map(res => {
-                res.json()['metadata'].forEach((url) => observableBatch.push(this._get(url)));
+                res.json()['metadata'].forEach((url) => observableBatch.push(this._getContainer(url)));
                 return Observable.forkJoin(observableBatch);
             }).catch(this.handleError);
 
     }
-    getContainer(id: string): Observable {
-        return this._get("/"+this._apiVersion+"/containers/"+id);
+    getContainer(id: string): Observable<Container> {
+        return this._getContainer("/"+this._apiVersion+"/containers/"+id);
     }
 
-    _get(url): Observable {
+    _getContainer(url): Observable<Container> {
         return this.http.get(this._lxdServer+url)
-            .map((res: Response) => <Container[]> res.json()['metadata'])
+            .map((res: Response) => <Container> res.json()['metadata'])
             .catch(this.handleError);
     }
 

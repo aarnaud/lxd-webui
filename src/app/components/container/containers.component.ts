@@ -30,21 +30,11 @@ export class ContainersComponent implements OnInit {
 
     private getContainers():void {
         this._containerService.getContainers()
-            .subscribe((forkJoin: Observable) => forkJoin.subscribe((containers: Container[]) => this.containers = containers));
+            .subscribe((forkJoin: Observable<Container[]>) => forkJoin.subscribe((containers: Container[]) => this.containers = containers));
     }
 
 
     isRunning(container: Container) {
         return (container.status == "Running")
-    }
-    setClasses(container: Container) {
-        let classes =  {
-            "label": true,
-            "pull-right": true,
-            "label-success": (container.status == "Running"),
-            "label-default": (container.status == "Stopped")
-        };
-        console.log(classes);
-        return classes;
     }
 }
