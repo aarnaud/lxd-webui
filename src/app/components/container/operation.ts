@@ -1,5 +1,5 @@
 export interface Operation {
-    class: string
+    class: string;
     created_at: Date;
     err: string;
     id: string;

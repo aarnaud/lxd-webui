@@ -33,7 +33,9 @@ interface WebpackModule {
     hot: {
         data?: any,
         idle: any,
-        accept(dependencies?: string | string[], callback?: (updatedDependencies?: any) => void): void;
+        accept(
+            dependencies?: string | string[],
+            callback?: (updatedDependencies?: any) => void): void;
         decline(dependencies?: string | string[]): void;
         dispose(callback?: (data?: any) => void): void;
         addDisposeHandler(callback?: (data?: any) => void): void;
@@ -55,7 +57,11 @@ interface ErrorStackTraceLimit {
 
 
 // Extend typings
-interface NodeRequire extends WebpackRequire {}
-interface ErrorConstructor extends ErrorStackTraceLimit {}
-interface NodeModule extends WebpackModule {}
-interface Global extends GlobalEnvironment  {}
+interface NodeRequire extends WebpackRequire {
+}
+interface ErrorConstructor extends ErrorStackTraceLimit {
+}
+interface NodeModule extends WebpackModule {
+}
+interface Global extends GlobalEnvironment {
+}
