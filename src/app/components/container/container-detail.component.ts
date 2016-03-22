@@ -73,7 +73,17 @@ export class ContainerDetailComponent implements OnInit{
                     });
 
                     sock.onmessage = function(msg) {
-                        term.write(msg.data);
+                        if(msg.data instanceof Blob){
+                            //TODO: in development env: RangeError: Maximum call stack size exceeded
+                            var reader = new FileReader();
+                            reader.addEventListener("loadend", function() {
+                                term.write(reader.result);
+                            });
+                            reader.readAsBinaryString(msg.data)
+                        } else {
+                            term.write(msg.data);
+                        }
+
                     };
 
                     sock.onclose = function(msg) {
