@@ -5,6 +5,9 @@
         <span>Status: {{container.status}}</span>
     </div>
     <div>
+        <button class="waves-effect waves-light btn" (click)="execAction()">
+            <i class="material-icons md-24">tv</i>
+        </button>
         <button class="waves-effect waves-light btn" (click)="startAction()">
             <i class="material-icons md-24">play_arrow</i>
         </button>
@@ -19,4 +22,5 @@
         </button>
         <!--<input [(ngModel)]="container.name" placeholder="name"/>-->
     </div>
+    <div id="console" style="width: 800px; height: 480px; margin: auto"></div>
 </div>

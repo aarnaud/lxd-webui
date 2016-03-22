@@ -3,6 +3,9 @@ import {RouteParams} from 'angular2/router';
 
 import {Container} from './container';
 import { ContainerService } from '../../services/container.service';
+//FIXME: stop typescript error
+declare var Materialize;
+declare var Terminal;
 
 @Component({
     selector: 'container-detail',
@@ -23,25 +26,25 @@ export class ContainerDetailComponent implements OnInit{
     }
 
     stopAction() {
-        this._containerService.setState(this.container.name, 'stop').subscribe(res => {
-            this.waitOperation(res.json().operation)
-        })
+        this._containerService.setState(this.container.name, 'stop').subscribe(
+            operation => this.waitOperation(operation.id)
+        )
     }
 
     startAction() {
-        this._containerService.setState(this.container.name, 'start').subscribe(res => {
-            this.waitOperation(res.json().operation)
-        })
+        this._containerService.setState(this.container.name, 'start').subscribe(
+            operation => this.waitOperation(operation.id)
+        )
     }
 
     restartAction() {
-        this._containerService.setState(this.container.name, 'restart').subscribe(res => {
-            this.waitOperation(res.json().operation)
-        })
+        this._containerService.setState(this.container.name, 'restart').subscribe(
+            operation => this.waitOperation(operation.id)
+        )
     }
 
-    waitOperation(operationUrl: string){
-        this._containerService.waitOperation(operationUrl).subscribe(operation => {
+    waitOperation(operationId: string){
+        this._containerService.waitOperation(operationId).subscribe(operation => {
             if(operation.status_code >= 400){
                 Materialize.toast(operation.status+': '+operation.err, 4000)
             } else {
@@ -51,8 +54,42 @@ export class ContainerDetailComponent implements OnInit{
         })
     }
 
+    execAction(){
+        this._containerService.exec(this.container.name, ["top"]).subscribe(
+            metadata => {
+                var sock = this._containerService.operationWebsocket(metadata.id, metadata.metadata.fds[0]);
+                sock.onopen = function (e) {
+                    var term = new Terminal({
+                        cols: 80,
+                        rows: 24,
+                        useStyle: true,
+                        screenKeys: false
+                    });
+
+                    term.open(document.getElementById("console"));
+
+                    term.on('data', function(data) {
+                        sock.send(data);
+                    });
+
+                    sock.onmessage = function(msg) {
+                        term.write(msg.data);
+                    };
+
+                    sock.onclose = function(msg) {
+                        term.destroy();
+                    };
+                };
+            },
+            err => Materialize.toast('Error: '+err, 4000)
+        )
+    }
+
     deleteAction() {
-        this._containerService.delete(this.container.name).subscribe()
+        this._containerService.delete(this.container.name).subscribe(
+            res => {},
+            err => Materialize.toast('Error: '+err, 4000)
+        )
     }
 
     updateStatus(){
