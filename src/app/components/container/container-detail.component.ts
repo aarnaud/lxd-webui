@@ -64,7 +64,8 @@ export class ContainerDetailComponent implements OnInit {
                         cols: 160,
                         rows: 32,
                         useStyle: true,
-                        screenKeys: false
+                        screenKeys: false,
+                        cursorBlink: false //To fix copy/paste in term
                     });
 
                     term.open(document.getElementById('console'));
