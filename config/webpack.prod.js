@@ -27,7 +27,7 @@ const ENV = process.env.NODE_ENV = process.env.ENV = 'production';
 const HOST = process.env.HOST || 'localhost';
 const PORT = process.env.PORT || 8080;
 const METADATA = {
-  title: 'Angular2 Webpack Starter by @gdi2990 from @AngularClass',
+  title: 'LXD-WebUI',
   baseUrl: '/',
   host: HOST,
   port: PORT,

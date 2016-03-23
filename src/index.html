@@ -1,20 +1,16 @@
 <html>
 <head>
     <base href="/">
-    <title>LXD WebUI</title>
+    <title><%= webpackConfig.metadata.title %></title>
+    <!-- base url -->
+    <base href="<%= webpackConfig.metadata.baseUrl %>">
+    <meta name="description" content="<%= webpackConfig.metadata.title %>">
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
-
-    <!-- Development Only -->
-    <script src="http://localhost:3000/webpack-dev-server.js"></script>
-
-    <script src="/polyfills.bundle.js"></script>
-    <script src="/vendor.bundle.js"></script>
-    <script src="/main.bundle.js"></script>
 </head>
 
 <!-- 3. Display the application -->
@@ -24,5 +20,10 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
     <script src="assets/js/term.js"></script>
+
+    <% if (webpackConfig.metadata.ENV === 'development') { %>
+    <!-- Webpack Dev Server reload -->
+    <script src="http://<%= webpackConfig.metadata.host %>:<%= webpackConfig.metadata.port %>/webpack-dev-server.js"></script>
+    <% } %>
 </body>
 </html>
