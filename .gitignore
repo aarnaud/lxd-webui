@@ -2,6 +2,7 @@ src/*.js
 src/**/*.js
 src/*.map
 src/**/*.map
+!src/assets/**
 dist/
 .idea/
 node_modules/
