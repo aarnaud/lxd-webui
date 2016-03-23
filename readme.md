@@ -1,20 +1,45 @@
 # LXD WebUI
 
-## Allow LXD to listen on 8443 port
+## Requirements
+
+### to develop
+
+* Node.js >= 4
+* npm
+
+````
+npm install
+npm start
+````
+
+### to build
+
+* Node.js >= 4
+* npm
+
+````
+npm install
+npm run build:prod
+npm run server:prod # Or other static HTTP server with redirect 404 on index.html
+````
+
+## Configuration on LXD
+
+### Allow LXD to listen on 8443 port
 
 ```bash
 lxc config set core.https_address [::]:8443
 ```
 
-## Add CORS settings on LXD (Since LXD 2.0.0.rc2)
+### Add CORS settings on LXD (Since LXD 2.0.0.rc2)
 
 ```bash
-lxc config set core.https_allowed_origin "*"
+lxc config set core.https_allowed_origin "*" # SECURITY WARNING: prefer to restrict with lxd-webui url 
 lxc config set core.https_allowed_methods "GET, POST, PUT, DELETE, OPTIONS"
 lxc config set core.https_allowed_headers "Content-Type"
 ```
 
-## Generate x509 certificate for browser authentification
+### Generate x509 certificate for browser authentification
 
 - Generate a client private key
 ```bash
