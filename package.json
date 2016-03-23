@@ -7,8 +7,8 @@
     "src"
   ],
   "scripts": {
-    "clean": "npm cache clean && rimraf node_modules doc typings coverage dist",
-    "clean:dist": "rimraf dist",
+    "clean": "npm cache clean && rm -rf node_modules doc typings coverage dist",
+    "clean:dist": "rm -rf dist",
     "preclean:install": "npm run clean",
     "clean:install": "npm set progress=false && npm install",
     "preclean:start": "npm run clean",
