@@ -54,15 +54,15 @@ export class ContainerDetailComponent implements OnInit {
     }
 
     execAction() {
-        this._containerService.exec(this.container.name, ['top']).subscribe(
+        this._containerService.exec(this.container.name, ['bash']).subscribe(
             metadata => {
-                let sock = this._containerService.operationWebsocket(
+                var sock = this._containerService.operationWebsocket(
                     metadata.id, metadata.metadata.fds[0]
                 );
                 sock.onopen = function (e) {
                     var term = new Terminal({
-                        cols: 80,
-                        rows: 24,
+                        cols: 160,
+                        rows: 32,
                         useStyle: true,
                         screenKeys: false
                     });
@@ -70,12 +70,11 @@ export class ContainerDetailComponent implements OnInit {
                     term.open(document.getElementById('console'));
 
                     term.on('data', function (data) {
-                        sock.send(data);
+                        sock.send(new Blob([data]));
                     });
 
                     sock.onmessage = function (msg) {
                         if (msg.data instanceof Blob) {
-                            //TODO: in development env: RangeError: Maximum call stack size exceeded
                             var reader = new FileReader();
                             reader.addEventListener('loadend', function () {
                                 term.write(reader.result);
@@ -88,7 +87,11 @@ export class ContainerDetailComponent implements OnInit {
                     };
 
                     sock.onclose = function (msg) {
+                        console.log('WebSocket closed');
                         term.destroy();
+                    };
+                    sock.onerror = function (err) {
+                        console.error(err);
                     };
                 };
             },
