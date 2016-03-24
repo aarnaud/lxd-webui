@@ -54,6 +54,10 @@ lxc config set core.https_allowed_methods "GET, POST, PUT, DELETE, OPTIONS"
 lxc config set core.https_allowed_headers "Content-Type"
 ```
 
+### Accept self-sign server certificate 
+
+Go on LXD server url (https://127.0.0.1:8443) with your browser.
+
 ### Generate x509 certificate for browser authentification
 
 - Generate a client private key
