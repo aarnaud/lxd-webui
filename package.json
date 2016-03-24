@@ -1,13 +1,16 @@
 {
   "name": "lxd-webui",
-  "version": "0.0.1",
+  "author": {
+    "name": "Anthony ARNAUD",
+    "email": "lxd-webui@anthony-arnaud.fr"
+  },
   "files": [
     "dist",
     "src"
   ],
   "scripts": {
-    "clean": "npm cache clean && rm -rf node_modules doc typings coverage dist",
-    "clean:dist": "rm -rf dist",
+    "clean": "npm cache clean && rm -rf node_modules doc typings coverage build dist",
+    "clean:build": "rm -rf build",
     "preclean:install": "npm run clean",
     "clean:install": "npm set progress=false && npm install",
     "preclean:start": "npm run clean",
@@ -20,20 +23,20 @@
     "watch:electron": "npm run build:electron:dev -- --watch",
     "watch:electron:hmr": "npm run watch:electron -- --hot",
     "build": "npm run build:dev",
-    "prebuild:dev": "npm run clean:dist",
+    "prebuild:dev": "npm run clean:build",
     "build:dev": "webpack --config config/webpack.dev.js --progress --profile --colors --display-error-details --display-cached",
-    "prebuild:prod": "npm run clean:dist",
+    "prebuild:prod": "npm run clean:build",
     "build:prod": "webpack --config config/webpack.prod.js  --progress --profile --colors --display-error-details --display-cached --bail",
-    "prebuild:electron:dev": "npm run clean:dist",
+    "prebuild:electron:dev": "npm run clean:build",
     "build:electron:dev": "webpack --config config/webpack.electron.dev.js --progress --profile --colors --display-error-details --display-cached",
-    "prebuild:electron:prod": "npm run clean:dist",
+    "prebuild:electron:prod": "npm run clean:build",
     "build:electron:prod": "webpack --config config/webpack.electron.prod.js  --progress --profile --colors --display-error-details --display-cached",
-    "package:electron": "./node_modules/.bin/build --appDir ./dist -d NuGet",
-    "electron": "./node_modules/.bin/electron dist",
+    "package:electron": "./node_modules/.bin/build --appDir ./build -d NuGet",
+    "electron": "./node_modules/.bin/electron build",
     "server": "npm run server:dev:hmr",
     "server:dev": "webpack-dev-server --config config/webpack.dev.js --inline --progress --profile --colors --watch --display-error-details --display-cached --content-base src/",
     "server:dev:hmr": "npm run server:dev -- --hot",
-    "server:prod": "http-server dist --cors",
+    "server:prod": "http-server build --cors",
     "start": "npm run server",
     "typings-install": "typings install",
     "postinstall": "npm run typings-install",
@@ -82,5 +85,6 @@
     "app-bundle-id": "your.id",
     "app-category-type": "your.app.category.type",
     "icon": "src/electron/icon.icns"
-  }
+  },
+  "main": "electron.js"
 }

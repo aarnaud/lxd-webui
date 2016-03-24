@@ -12,7 +12,7 @@ npm install
 npm start
 ````
 
-### to build
+### to build angular 2 webapp
 
 * Node.js >= 4
 * npm
@@ -20,8 +20,23 @@ npm start
 ````
 npm install
 npm run build:prod
-npm run server:prod # Or other static HTTP server with redirect 404 on index.html
+npm run server:prod # Not for production, just for test build
 ````
+
+Resulat in `build` directory
+
+### to build electon application with deb package
+
+* Node.js >= 4
+* npm
+
+````
+npm install
+npm run build:electron:prod
+npm run package:electron
+````
+
+Resulat in `dist` directory
 
 ## Configuration on LXD
 

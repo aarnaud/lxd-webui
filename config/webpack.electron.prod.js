@@ -92,7 +92,7 @@ module.exports = {
     // The output directory as absolute path (required).
     //
     // See: http://webpack.github.io/docs/configuration.html#output-path
-    path: helpers.root('dist/www'),
+    path: helpers.root('build/www'),
 
     // Specifies the name of each output file on disk.
     // IMPORTANT: You must not specify an absolute path here!
@@ -192,7 +192,7 @@ module.exports = {
     //
     // See: http://webpack.github.io/docs/configuration.html#module-noparse
     noParse: [
-      helpers.root('zone.js', 'dist'),
+      helpers.root('zone.js', 'build'),
       helpers.root('angular2', 'bundles')
     ]
 
