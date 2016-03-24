@@ -3,6 +3,7 @@ src/**/*.js
 src/*.map
 src/**/*.map
 !src/assets/**
+!src/electron/**
 dist/
 .idea/
 node_modules/

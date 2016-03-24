@@ -25,7 +25,7 @@ var ForkCheckerPlugin = require('awesome-typescript-loader').ForkCheckerPlugin;
  */
 const ENV = process.env.NODE_ENV = process.env.ENV = 'production';
 const HOST = process.env.HOST || 'localhost';
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 8907;
 const METADATA = {
   title: 'LXD-WebUI',
   baseUrl: '/',
@@ -92,7 +92,7 @@ module.exports = {
     // The output directory as absolute path (required).
     //
     // See: http://webpack.github.io/docs/configuration.html#output-path
-    path: helpers.root('dist'),
+    path: helpers.root('dist/app'),
 
     // Specifies the name of each output file on disk.
     // IMPORTANT: You must not specify an absolute path here!
@@ -245,7 +245,10 @@ module.exports = {
     // Copies project static assets.
     //
     // See: https://www.npmjs.com/package/copy-webpack-plugin
-    new CopyWebpackPlugin([{from: 'src/assets', to: 'assets'}]),
+    new CopyWebpackPlugin([
+      {from: 'src/assets', to: 'assets'},
+      {from: 'src/electron', to: '../'}
+    ]),
 
     // Plugin: HtmlWebpackPlugin
     // Description: Simplifies creation of HTML files to serve your webpack bundles.

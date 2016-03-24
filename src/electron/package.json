@@ -1,0 +1,4 @@
+{
+  "name": "LXD-WebUI",
+  "main": "electron.js"
+}

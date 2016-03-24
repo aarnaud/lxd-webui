@@ -2,36 +2,28 @@
  * @author: @AngularClass
  */
 
-var helpers = require('./helpers'); // Helper: root(), and rootDir() are defined at the bottom
 var webpack = require('webpack');
+var helpers = require('./helpers');
 
 /**
  * Webpack Plugins
  */
-var ProvidePlugin = require('webpack/lib/ProvidePlugin');
-var DefinePlugin = require('webpack/lib/DefinePlugin');
-var OccurenceOrderPlugin = require('webpack/lib/optimize/OccurenceOrderPlugin');
-var DedupePlugin = require('webpack/lib/optimize/DedupePlugin');
-var UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin');
-var CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
-var CompressionPlugin = require('compression-webpack-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-var WebpackMd5Hash = require('webpack-md5-hash');
 var ForkCheckerPlugin = require('awesome-typescript-loader').ForkCheckerPlugin;
 
 /**
  * Webpack Constants
  */
-const ENV = process.env.NODE_ENV = process.env.ENV = 'production';
-const HOST = process.env.HOST || 'localhost';
-const PORT = process.env.PORT || 8080;
+const ENV = process.env.ENV = process.env.NODE_ENV = 'development';
+const HMR = helpers.hasProcessFlag('hot');
 const METADATA = {
   title: 'LXD-WebUI',
   baseUrl: '/',
-  host: HOST,
-  port: PORT,
-  ENV: ENV
+  host: 'localhost',
+  port: 8907,
+  ENV: ENV,
+  HMR: HMR
 };
 
 /**
@@ -49,13 +41,20 @@ module.exports = {
   // Switch loaders to debug mode.
   //
   // See: http://webpack.github.io/docs/configuration.html#debug
-  debug: false,
+  debug: true,
 
   // Developer tool to enhance debugging
   //
   // See: http://webpack.github.io/docs/configuration.html#devtool
   // See: https://github.com/webpack/docs/wiki/build-performance#sourcemaps
-  //devtool: 'source-map',
+  devtool: 'cheap-module-eval-source-map',
+
+  // Cache generated modules and chunks to improve performance for multiple incremental builds.
+  // This is enabled by default in watch mode.
+  // You can pass false to disable it.
+  //
+  // See: http://webpack.github.io/docs/configuration.html#cache
+  // cache: false,
 
   // The entry point for the bundle
   // Our Angular.js app
@@ -65,7 +64,7 @@ module.exports = {
 
     'polyfills': './src/polyfills.ts',
     'vendor': './src/vendor.ts',
-    'main': './src/main.browser.ts'
+    'main': './src/main.browser.ts',
 
   },
 
@@ -92,25 +91,25 @@ module.exports = {
     // The output directory as absolute path (required).
     //
     // See: http://webpack.github.io/docs/configuration.html#output-path
-    path: helpers.root('dist'),
+    path: helpers.root('dist/app'),
 
     // Specifies the name of each output file on disk.
     // IMPORTANT: You must not specify an absolute path here!
     //
     // See: http://webpack.github.io/docs/configuration.html#output-filename
-    filename: '[name].[chunkhash].bundle.js',
+    filename: '[name].bundle.js',
 
     // The filename of the SourceMaps for the JavaScript files.
     // They are inside the output.path directory.
     //
     // See: http://webpack.github.io/docs/configuration.html#output-sourcemapfilename
-    sourceMapFilename: '[name].[chunkhash].bundle.map',
+    sourceMapFilename: '[name].map',
 
     // The filename of non-entry chunks as relative path
     // inside the output.path directory.
     //
     // See: http://webpack.github.io/docs/configuration.html#output-chunkfilename
-    chunkFilename: '[id].[chunkhash].chunk.js'
+    chunkFilename: '[id].chunk.js'
 
   },
 
@@ -127,7 +126,7 @@ module.exports = {
       // Tslint loader support for *.ts files
       //
       // See: https://github.com/wbuchwalter/tslint-loader
-      {test: /\.ts$/, loader: 'tslint-loader', exclude: [helpers.root('node_modules')]},
+      // { test: /\.ts$/, loader: 'tslint-loader', exclude: [ helpers.root('node_modules') ] },
 
       // Source map loader support for *.js files
       // Extracts SourceMaps for source files that as added as sourceMappingURL comment.
@@ -152,21 +151,7 @@ module.exports = {
       // Typescript loader support for .ts and Angular 2 async routes via .async.ts
       //
       // See: https://github.com/s-panferov/awesome-typescript-loader
-      {
-        test: /\.ts$/, loader: 'awesome-typescript-loader',
-        query: {
-          'compilerOptions': {
-
-            // Remove TypeScript helpers to be injected
-            // below by DefinePlugin
-            'removeComments': true
-
-          }
-        },
-        exclude: [
-          /\.(spec|e2e)\.ts$/
-        ]
-      },
+      {test: /\.ts$/, loader: 'awesome-typescript-loader', exclude: [/\.(spec|e2e)\.ts$/]},
 
       // Json loader support for *.json files.
       //
@@ -183,17 +168,8 @@ module.exports = {
       // Returns file content as string
       //
       // See: https://github.com/webpack/raw-loader
-      {test: /\.html$/, loader: 'raw-loader', exclude: [helpers.root('src/index.html')]}
+      {test: /\.html$/, loader: 'raw-loader', exclude: [helpers.root('src/index.html')]},
 
-    ],
-
-    // A RegExp or an array of RegExps. Don’t parse files matching.
-    // With noParse you can exclude big libraries from parsing, but this can break stuff.
-    //
-    // See: http://webpack.github.io/docs/configuration.html#module-noparse
-    noParse: [
-      helpers.root('zone.js', 'dist'),
-      helpers.root('angular2', 'bundles')
     ]
 
   },
@@ -209,27 +185,13 @@ module.exports = {
     // See: https://github.com/s-panferov/awesome-typescript-loader#forkchecker-boolean-defaultfalse
     new ForkCheckerPlugin(),
 
-    // Plugin: WebpackMd5Hash
-    // Description: Plugin to replace a standard webpack chunkhash with md5.
-    //
-    // See: https://www.npmjs.com/package/webpack-md5-hash
-    new WebpackMd5Hash(),
-
-    // Plugin: DedupePlugin
-    // Description: Prevents the inclusion of duplicate code into your bundle
-    // and instead applies a copy of the function at runtime.
-    //
-    // See: https://webpack.github.io/docs/list-of-plugins.html#defineplugin
-    // See: https://github.com/webpack/docs/wiki/optimization#deduplication
-    new DedupePlugin(),
-
     // Plugin: OccurenceOrderPlugin
     // Description: Varies the distribution of the ids to get the smallest id length
     // for often used ids.
     //
     // See: https://webpack.github.io/docs/list-of-plugins.html#occurrenceorderplugin
     // See: https://github.com/webpack/docs/wiki/optimization#minimize
-    new OccurenceOrderPlugin(true),
+    new webpack.optimize.OccurenceOrderPlugin(true),
 
     // Plugin: CommonsChunkPlugin
     // Description: Shares common code between the pages.
@@ -237,7 +199,7 @@ module.exports = {
     //
     // See: https://webpack.github.io/docs/list-of-plugins.html#commonschunkplugin
     // See: https://github.com/webpack/docs/wiki/optimization#multi-page-app
-    new CommonsChunkPlugin({name: ['main', 'vendor', 'polyfills'], minChunks: Infinity}),
+    new webpack.optimize.CommonsChunkPlugin({name: ['main', 'vendor', 'polyfills'], minChunks: Infinity}),
 
     // Plugin: CopyWebpackPlugin
     // Description: Copy files and directories in webpack.
@@ -245,7 +207,10 @@ module.exports = {
     // Copies project static assets.
     //
     // See: https://www.npmjs.com/package/copy-webpack-plugin
-    new CopyWebpackPlugin([{from: 'src/assets', to: 'assets'}]),
+    new CopyWebpackPlugin([
+      {from: 'src/assets', to: 'assets'},
+      {from: 'src/electron', to: '../'},
+    ]),
 
     // Plugin: HtmlWebpackPlugin
     // Description: Simplifies creation of HTML files to serve your webpack bundles.
@@ -263,98 +228,7 @@ module.exports = {
     //
     // See: https://webpack.github.io/docs/list-of-plugins.html#defineplugin
     // NOTE: when adding more properties make sure you include them in custom-typings.d.ts
-    new DefinePlugin({'ENV': JSON.stringify(METADATA.ENV), 'HMR': false}),
-
-    // Plugin: UglifyJsPlugin
-    // Description: Minimize all JavaScript output of chunks.
-    // Loaders are switched into minimizing mode.
-    //
-    // See: https://webpack.github.io/docs/list-of-plugins.html#uglifyjsplugin
-    // NOTE: To debug prod builds uncomment //debug lines and comment //prod lines
-    new UglifyJsPlugin({
-      // beautify: true, //debug
-      // mangle: false, //debug
-      // dead_code: false, //debug
-      // unused: false, //debug
-      // deadCode: false, //debug
-      // compress: {
-      //   screw_ie8: true,
-      //   keep_fnames: true,
-      //   drop_debugger: false,
-      //   dead_code: false,
-      //   unused: false
-      // }, // debug
-      // comments: true, //debug
-
-      beautify: false,//prod
-
-      // mangle: { screw_ie8 : true }, //prod
-      mangle: {
-        screw_ie8: true,
-        except: [
-          'App',
-          'About',
-          'Contact',
-          'Home',
-          'Menu',
-          'Footer',
-          'XLarge',
-          'RouterActive',
-          'RouterLink',
-          'RouterOutlet',
-          'NgFor',
-          'NgIf',
-          'NgClass',
-          'NgSwitch',
-          'NgStyle',
-          'NgSwitchDefault',
-          'NgControl',
-          'NgControlName',
-          'NgControlGroup',
-          'NgFormControl',
-          'NgModel',
-          'NgFormModel',
-          'NgForm',
-          'NgSelectOption',
-          'DefaultValueAccessor',
-          'NumberValueAccessor',
-          'CheckboxControlValueAccessor',
-          'SelectControlValueAccessor',
-          'RadioControlValueAccessor',
-          'NgControlStatus',
-          'RequiredValidator',
-          'MinLengthValidator',
-          'MaxLengthValidator',
-          'PatternValidator',
-          'AsyncPipe',
-          'DatePipe',
-          'JsonPipe',
-          'NumberPipe',
-          'DecimalPipe',
-          'PercentPipe',
-          'CurrencyPipe',
-          'LowerCasePipe',
-          'UpperCasePipe',
-          'SlicePipe',
-          'ReplacePipe',
-          'I18nPluralPipe',
-          'I18nSelectPipe'
-        ] // Needed for uglify RouterLink problem
-      }, // prod
-      compress: {screw_ie8: true}, //prod
-      comments: false //prod
-    }),
-
-    // Plugin: CompressionPlugin
-    // Description: Prepares compressed versions of assets to serve
-    // them with Content-Encoding
-    //
-    // See: https://github.com/webpack/compression-webpack-plugin
-    new CompressionPlugin({
-      algorithm: helpers.gzipMaxLevel,
-      regExp: /\.css$|\.html$|\.js$|\.map$/,
-      threshold: 2 * 1024
-    })
+    new webpack.DefinePlugin({'ENV': JSON.stringify(METADATA.ENV), 'HMR': HMR})
 
   ],
 
@@ -363,21 +237,9 @@ module.exports = {
   //
   // See: https://github.com/wbuchwalter/tslint-loader
   tslint: {
-    emitErrors: true,
-    failOnHint: true,
+    emitErrors: false,
+    failOnHint: false,
     resourcePath: 'src'
-  },
-
-  // Html loader advanced options
-  //
-  // See: https://github.com/webpack/html-loader#advanced-options
-  // TODO: Need to workaround Angular 2's html syntax => #id [bind] (event) *ngFor
-  htmlLoader: {
-    minimize: true,
-    removeAttributeQuotes: false,
-    caseSensitive: true,
-    customAttrSurround: [[/#/, /(?:)/], [/\*/, /(?:)/], [/\[?\(?/, /(?:)/]],
-    customAttrAssign: [/\)?\]?=/]
   },
 
   // Webpack Development Server configuration
@@ -385,10 +247,16 @@ module.exports = {
   // The server emits information about the compilation state to the client,
   // which reacts to those events.
   //
-  // WARNING: Don't use devServer for production
-  // devServer: {
-  //
-  // },
+  // See: https://webpack.github.io/docs/webpack-dev-server.html
+  devServer: {
+    port: METADATA.port,
+    host: METADATA.host,
+    historyApiFallback: true,
+    watchOptions: {
+      aggregateTimeout: 300,
+      poll: 1000
+    }
+  },
 
   // Include polyfills or mocks for various node stuff
   // Description: Node configuration
@@ -396,11 +264,10 @@ module.exports = {
   // See: https://webpack.github.io/docs/configuration.html#node
   node: {
     global: 'window',
-    process: false,
+    process: true,
     crypto: 'empty',
     module: false,
     clearImmediate: false,
     setImmediate: false
   }
-
 };
