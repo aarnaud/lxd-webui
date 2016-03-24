@@ -1,4 +1,9 @@
 {
   "name": "LXD-WebUI",
-  "main": "electron.js"
+  "main": "electron.js",
+  "description": "LXD web ui client",
+  "author": {
+    "name": "Anthony ARNAUD",
+    "email": "lxd-webui@anthony-arnaud.fr"
+  }
 }

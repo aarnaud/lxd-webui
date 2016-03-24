@@ -1,7 +1,6 @@
 {
   "name": "lxd-webui",
   "version": "0.0.1",
-  "main": "index.js",
   "files": [
     "dist",
     "src"
@@ -29,6 +28,7 @@
     "build:electron:dev": "webpack --config config/webpack.electron.dev.js --progress --profile --colors --display-error-details --display-cached",
     "prebuild:electron:prod": "npm run clean:dist",
     "build:electron:prod": "webpack --config config/webpack.electron.prod.js  --progress --profile --colors --display-error-details --display-cached",
+    "package:electron": "./node_modules/.bin/build --appDir ./dist -d NuGet",
     "electron": "./node_modules/.bin/electron dist",
     "server": "npm run server:dev:hmr",
     "server:dev": "webpack-dev-server --config config/webpack.dev.js --inline --progress --profile --colors --watch --display-error-details --display-cached --content-base src/",
@@ -50,6 +50,7 @@
     "compression-webpack-plugin": "^0.3.0",
     "copy-webpack-plugin": "^1.1.1",
     "css-loader": "^0.23.1",
+    "electron-builder": "^3.0.0",
     "electron-prebuilt": "^0.37.2",
     "es6-promise": "^3.1.2",
     "es6-promise-loader": "^1.0.1",
@@ -76,5 +77,10 @@
     "webpack": "^1.12.14",
     "webpack-dev-server": "^1.14.1",
     "webpack-md5-hash": "^0.0.5"
+  },
+  "build": {
+    "app-bundle-id": "your.id",
+    "app-category-type": "your.app.category.type",
+    "icon": "src/electron/icon.icns"
   }
 }

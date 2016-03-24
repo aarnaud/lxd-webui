@@ -41,7 +41,7 @@ app.on('ready', function() {
 function requestHandler(req, res) {
     var
         file    = req.url == '/' ? '/index.html' : req.url,
-        root    = __dirname + '/app',
+        root    = __dirname + '/www',
         page404 = root + '/index.html';
 
     getFile((root + file), res, page404);

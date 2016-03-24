@@ -92,7 +92,7 @@ module.exports = {
     // The output directory as absolute path (required).
     //
     // See: http://webpack.github.io/docs/configuration.html#output-path
-    path: helpers.root('dist/app'),
+    path: helpers.root('dist/www'),
 
     // Specifies the name of each output file on disk.
     // IMPORTANT: You must not specify an absolute path here!
