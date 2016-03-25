@@ -33,7 +33,7 @@ Resulat in `build` directory
 ````
 npm install
 npm run build:electron:prod
-npm run package:electron
+npm run package:electron:linux
 ````
 
 Resulat in `dist` directory
