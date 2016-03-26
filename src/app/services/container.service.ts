@@ -1,8 +1,8 @@
 import {Injectable} from 'angular2/core';
 import {Http, Response} from 'angular2/http';
 import {Observable} from 'rxjs/Observable';
-import {Container} from '../components/container/container';
-import {Operation} from '../components/container/operation';
+import {Container} from '../models/container';
+import {Operation} from '../models/operation';
 
 @Injectable()
 export class ContainerService {

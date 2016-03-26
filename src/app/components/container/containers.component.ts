@@ -1,6 +1,6 @@
 import {Component, OnInit} from 'angular2/core';
 import {Router} from 'angular2/router';
-import {Container} from './container';
+import {Container} from '../../models/container';
 import {ContainerDetailComponent} from './container-detail.component';
 import {ContainerService} from '../../services/container.service';
 import {Observable}     from 'rxjs/Observable';

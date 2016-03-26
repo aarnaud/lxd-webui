@@ -1,6 +1,6 @@
 import {Component, OnInit} from 'angular2/core';
 import {RouteParams} from 'angular2/router';
-import {Container} from './container';
+import {Container} from '../../models/container';
 import {ContainerService} from '../../services/container.service';
 
 //FIXME: stop typescript error
