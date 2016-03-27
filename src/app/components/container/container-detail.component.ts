@@ -2,20 +2,22 @@ import {Component, OnInit} from 'angular2/core';
 import {RouteParams} from 'angular2/router';
 import {Container} from '../../models/container';
 import {ContainerService} from '../../services/container.service';
+import {ToastsManager} from 'ng2-toastr/ng2-toastr';
 
 //FIXME: stop typescript error
-declare var Materialize;
 declare var Terminal;
 
 @Component({
     selector: 'container-detail',
     templateUrl: 'assets/templates/container-detail.component.html',
+    providers: [ToastsManager]
 })
 export class ContainerDetailComponent implements OnInit {
     container: Container;
 
     constructor(private _containerService: ContainerService,
-                private _routeParams: RouteParams) {
+                private _routeParams: RouteParams,
+                private toastr: ToastsManager) {
     }
 
     ngOnInit(): any {
@@ -45,9 +47,9 @@ export class ContainerDetailComponent implements OnInit {
     waitOperation(operationId: string) {
         this._containerService.waitOperation(operationId).subscribe(operation => {
             if (operation.status_code >= 400) {
-                Materialize.toast(operation.status + ': ' + operation.err, 4000);
+                this.toastr.error(operation.err, operation.status);
             } else {
-                Materialize.toast(operation.status, 4000);
+                this.toastr.success('', operation.status);
             }
             this.updateStatus();
         });
@@ -96,7 +98,7 @@ export class ContainerDetailComponent implements OnInit {
                     };
                 };
             },
-            err => Materialize.toast('Error: ' + err, 4000)
+            err => this.toastr.error('Error: ' + err)
         );
     }
 
@@ -104,7 +106,7 @@ export class ContainerDetailComponent implements OnInit {
         this._containerService.delete(this.container.name).subscribe(
             res => {
             },
-            err => Materialize.toast('Error: ' + err, 4000)
+            err => this.toastr.error('Error: ' + err)
         );
     }
 

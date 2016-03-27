@@ -2,5 +2,8 @@
   "ambientDependencies": {
     "es6-shim": "github:DefinitelyTyped/DefinitelyTyped/es6-shim/es6-shim.d.ts#6697d6f7dadbf5773cb40ecda35a76027e0783b2",
     "node": "registry:dt/node#4.0.0+20160316042000"
+  },
+  "dependencies": {
+    "moment": "registry:npm/moment#2.10.5+20160211003958"
   }
 }

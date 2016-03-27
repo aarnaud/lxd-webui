@@ -1,9 +1,4 @@
-<nav>
-    <div class="nav-wrapper light-blue darken-4">
-        <a href="#" class="brand-logo right">{{title}}</a>
-        <ul id="nav-mobile" class="left hide-on-med-and-down">
-            <li><a [routerLink]="['Containers']">Containers</a></li>
-        </ul>
-    </div>
-</nav>
-<router-outlet></router-outlet>
+<demo-header title="{{title}}">Loading header</demo-header>
+<div class="container main-content" style="margin-top: 51px;">
+    <router-outlet></router-outlet>
+</div>

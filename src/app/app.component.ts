@@ -5,12 +5,14 @@ import {ContainerService}     from './services/container.service';
 import {ContainersComponent} from './components/container/containers.component';
 import {ContainerDetailComponent} from './components/container/container-detail.component';
 import {RouteDefinition} from 'angular2/router';
+import {Header} from './menu.component';
 
 @Component({
     selector: 'lxd-app',
     templateUrl: 'assets/templates/app.component.html',
     directives: [
-        ROUTER_DIRECTIVES
+        ROUTER_DIRECTIVES,
+        Header
     ],
     providers: [
         HTTP_PROVIDERS,
@@ -21,10 +23,15 @@ import {RouteDefinition} from 'angular2/router';
 
 @RouteConfig([
     <RouteDefinition>{
+        path: '/',
+        name: 'Home',
+        component: ContainersComponent,
+        useAsDefault: true
+    },
+    <RouteDefinition>{
         path: '/containers',
         name: 'Containers',
         component: ContainersComponent,
-        useAsDefault: true
     },
     <RouteDefinition>{
         path: '/container/:id',
@@ -34,5 +41,5 @@ import {RouteDefinition} from 'angular2/router';
 ])
 
 export class AppComponent {
-    title = 'LXD WebUI';
+    title: string = 'LXD WebUI';
 }

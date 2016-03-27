@@ -46,6 +46,9 @@
   },
   "dependencies": {
     "angular2": "2.0.0-beta.11",
+    "ng2-bootstrap": "^1.0.7",
+    "ng2-modal": "0.0.2",
+    "ng2-toastr": "^0.1.6",
     "rxjs": "5.0.0-beta.2",
     "zone.js": "0.6.4"
   },

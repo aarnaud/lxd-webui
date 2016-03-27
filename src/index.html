@@ -8,16 +8,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!--Import materialize.css-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
+    <!--Import bootstrap.css-->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <!--Import app style -->
+    <link href="assets/styles/main.css">
 </head>
 
 <!-- 3. Display the application -->
 <body>
 <lxd-app>Loading...</lxd-app>
-    <!--Import jQuery before materialize.js-->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
     <script src="assets/js/term.js"></script>
 
     <% if (webpackConfig.metadata.ENV === 'development') { %>
