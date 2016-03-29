@@ -15,5 +15,16 @@
                 <li class="nav-item"><a class="nav-link" [routerLink]="['Containers']">Containers</a></li>
             </ul>
         </nav>
+        <div class="navbar-form navbar-right hidden-xs hidden-xs-down">
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon" id="setting-lxd-url"><i class="material-icons md-18">settings applications</i></span>
+                    <input type="text" class="form-control"
+                           aria-describedby="setting-lxd-url"
+                           placeholder="LXD server URL"
+                           value="{{LXDServerUrl}}" (keyup.enter)="onLXDUrl($event)">
+                </div>
+            </div>
+        </div>
     </div>
 </header>

@@ -23,24 +23,30 @@ export class ContainerDetailComponent implements OnInit {
     ngOnInit(): any {
         let id = this._routeParams.get('id');
         this._containerService.getContainer(id)
-            .subscribe(container => this.container = container);
+            .subscribe(
+                container => this.container = container,
+                err => this.toastr.error(err)
+            );
     }
 
     stopAction() {
         this._containerService.setState(this.container.name, 'stop').subscribe(
-            operation => this.waitOperation(operation.id)
+            operation => this.waitOperation(operation.id),
+            err => this.toastr.error(err)
         );
     }
 
     startAction() {
         this._containerService.setState(this.container.name, 'start').subscribe(
-            operation => this.waitOperation(operation.id)
+            operation => this.waitOperation(operation.id),
+            err => this.toastr.error(err)
         );
     }
 
     restartAction() {
         this._containerService.setState(this.container.name, 'restart').subscribe(
-            operation => this.waitOperation(operation.id)
+            operation => this.waitOperation(operation.id),
+            err => this.toastr.error(err)
         );
     }
 
@@ -52,7 +58,9 @@ export class ContainerDetailComponent implements OnInit {
                 this.toastr.success('', operation.status);
             }
             this.updateStatus();
-        });
+        },
+        err => this.toastr.error(err)
+        );
     }
 
     execAction() {
@@ -98,7 +106,7 @@ export class ContainerDetailComponent implements OnInit {
                     };
                 };
             },
-            err => this.toastr.error('Error: ' + err)
+            err => this.toastr.error(err)
         );
     }
 
@@ -106,13 +114,14 @@ export class ContainerDetailComponent implements OnInit {
         this._containerService.delete(this.container.name).subscribe(
             res => {
             },
-            err => this.toastr.error('Error: ' + err)
+            err => this.toastr.error(err)
         );
     }
 
     updateStatus() {
         this._containerService.getContainer(this.container.name).subscribe(
-            res => this.container = res
+            res => this.container = res,
+            err => this.toastr.error(err)
         );
     }
 }

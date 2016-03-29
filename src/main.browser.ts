@@ -15,6 +15,7 @@ import {ENV_PROVIDERS} from './platform/environment';
  * our top level component that holds all of our components
  */
 import {AppComponent} from './app/app.component';
+import {AppConfig} from './app/services/config.service';
 
 /*
  * Bootstrap our Angular app with a top level component `App` and inject
@@ -23,6 +24,7 @@ import {AppComponent} from './app/app.component';
 export function main(initialState = {}) {
     let APP_PROVIDERS = [
         provideInitialState(initialState),
+        AppConfig
     ];
 
     return bootstrap(AppComponent, [

@@ -3,16 +3,19 @@ import {Http, Response} from 'angular2/http';
 import {Observable} from 'rxjs/Observable';
 import {Container} from '../models/container';
 import {Operation} from '../models/operation';
+import {AppConfig} from './config.service';
 
 @Injectable()
 export class ContainerService {
-    constructor(private http: Http) {
+    constructor(private appConfig: AppConfig, private http: Http) {
+        appConfig.onChangeConfig.subscribe( e => this.loadServerConfig());
+        this.loadServerConfig();
     }
 
-    private _protocole = 'https://';
-    private _lxdServer = '127.0.0.1:8443';  // URL to web api
+    private _protocole;
+    private _lxdServer;  // URL to web api
     private _apiVersion = '1.0';  // URL to web api
-    private _lxdBaseUrl = this._protocole + this._lxdServer;
+    private _lxdBaseUrl;
 
    public getContainers(): Observable<Observable<Container[]>> {
         let observableBatch = [];
@@ -94,7 +97,13 @@ export class ContainerService {
     private handleError(error: Response) {
         // in a real world app, we may send the error to some remote logging infrastructure
         // instead of just logging it to the console
-        console.error(error.json());
+        console.error(error);
         return Observable.throw(error.json().error || 'Server error');
+    }
+
+    private loadServerConfig() {
+        this._lxdServer = this.appConfig.LXDServer;
+        this._protocole = this.appConfig.LXDProtocol;
+        this._lxdBaseUrl = this._protocole + this._lxdServer;
     }
 }
