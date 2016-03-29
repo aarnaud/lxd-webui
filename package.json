@@ -46,6 +46,8 @@
   },
   "dependencies": {
     "angular2": "2.0.0-beta.11",
+    "bootstrap": "^3.3.6",
+    "material-design-icons": "^2.2.3",
     "ng2-bootstrap": "^1.0.7",
     "ng2-modal": "0.0.2",
     "ng2-toastr": "^0.1.6",

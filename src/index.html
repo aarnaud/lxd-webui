@@ -7,17 +7,17 @@
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--Import Google Icon Font-->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="<%= webpackConfig.metadata.baseUrl %>vendors/material-icons/material-icons.css" rel="stylesheet">
     <!--Import bootstrap.css-->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<%= webpackConfig.metadata.baseUrl %>vendors/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!--Import app style -->
-    <link href="assets/styles/main.css">
+    <link href="<%= webpackConfig.metadata.baseUrl %>assets/styles/main.css">
 </head>
 
 <!-- 3. Display the application -->
 <body>
 <lxd-app>Loading...</lxd-app>
-    <script src="assets/js/term.js"></script>
+    <script src="<%= webpackConfig.metadata.baseUrl %>assets/js/term.js"></script>
 
     <% if (webpackConfig.metadata.ENV === 'development') { %>
     <!-- Webpack Dev Server reload -->
