@@ -357,11 +357,11 @@ module.exports = {
     // them with Content-Encoding
     //
     // See: https://github.com/webpack/compression-webpack-plugin
-    new CompressionPlugin({
-      algorithm: helpers.gzipMaxLevel,
-      regExp: /\.css$|\.html$|\.js$|\.map$/,
-      threshold: 2 * 1024
-    })
+    // new CompressionPlugin({
+    //   algorithm: helpers.gzipMaxLevel,
+    //   regExp: /\.css$|\.html$|\.js$|\.map$/,
+    //   threshold: 2 * 1024
+    // })
 
   ],
 
