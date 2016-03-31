@@ -1,0 +1,17 @@
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th data-field="name">Name</th>
+        <th data-field="status">Status</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr *ngFor="#container of containers"
+        (click)="onSelect(container)"
+        [class.selected]="container === selectedContainer">
+        <td>{{container.name}}</td>
+        <td>{{container.status}}</td>
+    </tr>
+    </tbody>
+</table>
