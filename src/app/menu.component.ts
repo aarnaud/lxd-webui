@@ -23,6 +23,10 @@ export class Header {
     }
 
     private onLXDUrl(event: KeyboardEvent) {
-        this.appConfig.LXDServerUrl = (<HTMLInputElement>event.target).value;
+        var LXDServerUrl = (<HTMLInputElement>event.target).value;
+        // Record new LXD Server URL in localstorage
+        localStorage.setItem('lxd_server_url', LXDServerUrl);
+        // Apply new LXD Server URL into application configuration
+        this.appConfig.LXDServerUrl = LXDServerUrl;
     }
 }
