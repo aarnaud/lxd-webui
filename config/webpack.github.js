@@ -259,6 +259,9 @@ module.exports = {
     //
     // See: https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({template: 'src/index.html', chunksSortMode: 'none'}),
+    
+    // Hack push state on github
+    new HtmlWebpackPlugin({template: 'src/index.html', filename: '404.html', chunksSortMode: 'none'}),
 
     // Plugin: DefinePlugin
     // Description: Define free variables.
