@@ -31,6 +31,9 @@ Resulat in `build` directory
 * npm
 
 ````
+sudo apt-get install graphicsmagick imagemagick icnsutils
+sudo apt-get install ruby-dev build-essential
+sudo gem install fpm
 npm install
 npm run build:electron:prod
 npm run package:electron:linux
