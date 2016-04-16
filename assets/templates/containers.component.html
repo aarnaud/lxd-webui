@@ -11,7 +11,7 @@
         (click)="onSelect(container)"
         [class.selected]="container === selectedContainer">
         <td>{{container.name}}</td>
-        <td>{{container.status}}</td>
+        <td><label class="label" [ngClass]="{'label-success': isRunning(container), 'label-danger': isStopped(container), 'label-warning': (!isRunning(container)&&!isStopped(container))}">{{container.status}}</label></td>
     </tr>
     </tbody>
 </table>
