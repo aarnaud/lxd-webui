@@ -40,11 +40,11 @@ export class ContainersComponent implements OnInit {
             err => this.toastr.error(err));
     }
 
-    public isRunning(container: Container):boolean {
+    public isRunning(container: Container): boolean {
         return (container.status === 'Running');
     }
 
-    public isStopped(container: Container):boolean {
+    public isStopped(container: Container): boolean {
         return (container.status === 'Stopped');
     }
 }
