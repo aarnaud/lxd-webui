@@ -1,5 +1,5 @@
-import {Router} from 'angular2/router';
-import {isPresent} from 'angular2/src/facade/lang';
+import {Router} from '@angular/router-deprecated';
+import {isPresent} from '@angular/core/src/facade/lang';
 import {
   Directive,
   Query,
@@ -9,8 +9,8 @@ import {
   Renderer,
   Optional,
   Input
-} from 'angular2/core';
-import {Instruction, RouterLink} from 'angular2/router';
+} from '@angular/core';
+import {Instruction, RouterLink} from '@angular/router-deprecated';
 
 /**
  * RouterActive dynamically finds the first element with routerLink and toggles the active class
@@ -26,7 +26,7 @@ import {Instruction, RouterLink} from 'angular2/router';
   selector: '[router-active], [routerActive]'
 })
 export class RouterActive {
-  @Input() routerActive: string = null;
+  @Input() routerActive: string = undefined;
   routerActiveAttr: string = 'active';
 
   constructor(
@@ -51,7 +51,7 @@ export class RouterActive {
   }
 
   private _findRootRouter(): Router {
-    var router: Router = this.router;
+    let router: Router = this.router;
     while (isPresent(router.parent)) {
       router = router.parent;
     }

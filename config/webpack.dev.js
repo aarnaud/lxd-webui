@@ -257,7 +257,8 @@ module.exports = {
     watchOptions: {
       aggregateTimeout: 300,
       poll: 1000
-    }
+    },
+    outputPath: helpers.root('build')
   },
 
   // Include polyfills or mocks for various node stuff

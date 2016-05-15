@@ -1,5 +1,5 @@
-import {Component, OnInit} from 'angular2/core';
-import {Router} from 'angular2/router';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router-deprecated';
 import {Container} from '../../models/container';
 import {ContainerService} from '../../services/container.service';
 import {Observable}     from 'rxjs/Observable';

@@ -1,8 +1,7 @@
 /*
  * Providers provided by Angular
  */
-import {bootstrap} from 'angular2/platform/browser';
-import {provideInitialState, hotModuleReplacement} from 'angular2-hmr';
+import { bootstrap } from '@angular/platform-browser-dynamic';
 /*
  * Platform and Environment
  * our providers/directives/pipes
@@ -21,9 +20,8 @@ import {AppConfig} from './app/services/config.service';
  * Bootstrap our Angular app with a top level component `App` and inject
  * our Services and Providers into Angular's dependency injection
  */
-export function main(initialState = {}) {
+export function main(initialHmrState?: any): Promise<any> {
     let APP_PROVIDERS = [
-        provideInitialState(initialState),
         AppConfig
     ];
 
@@ -56,8 +54,9 @@ export function main(initialState = {}) {
  */
 if ('development' === ENV && HMR === true) {
     // activate hot module reload
-    hotModuleReplacement(main, module);
+    let ngHmr = require('angular2-hmr');
+    ngHmr.hotModuleReplacement(main, module);
 } else {
-    // bootstrap when documetn is ready
+    // bootstrap when document is ready
     document.addEventListener('DOMContentLoaded', () => main());
 }

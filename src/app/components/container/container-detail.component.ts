@@ -1,5 +1,5 @@
-import {Component, OnInit} from 'angular2/core';
-import {RouteParams} from 'angular2/router';
+import {Component, OnInit} from '@angular/core';
+import {RouteParams} from '@angular/router-deprecated';
 import {Container} from '../../models/container';
 import {ContainerService} from '../../services/container.service';
 import {ToastsManager} from 'ng2-toastr/ng2-toastr';
