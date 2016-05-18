@@ -3,15 +3,17 @@ var http = require('http');
 var path = require('path');
 var fs = require('fs');
 // Module to control application life.
+const electron = require('electron');
 const {app} = electron;
 // Module to create native browser window.
 const {BrowserWindow} = electron;
-const {crashReporter} = require('electron');
+// Module to reporte application crash
+const {crashReporter} = electron;
 
 //WARNING: INSECURE MODE
 app.commandLine.appendSwitch("ignore-certificate-errors");
 
-crashReporter.start();
+// crashReporter.start();
 
 var mainWindow = null;
 
