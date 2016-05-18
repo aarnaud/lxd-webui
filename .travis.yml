@@ -10,9 +10,9 @@ node_js:
 sudo: true
 
 before_install:
-	- sudo apt-get update -qq
-	- sudo apt-get install -qq -y nodejs graphicsmagick imagemagick icnsutils ruby-dev build-essential
-	- gem install fpm
+  - sudo apt-get update -qq
+  - sudo apt-get install -qq -y nodejs graphicsmagick imagemagick icnsutils ruby-dev build-essential
+  - gem install fpm
 
 install:
   - npm install
