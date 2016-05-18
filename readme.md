@@ -1,5 +1,4 @@
-# LXD WebUI
-
+# LXD WebUI [![Build Status](https://travis-ci.org/aarnaud/lxd-webui.svg?branch=master)](https://travis-ci.org/aarnaud/lxd-webui)
 ## Requirements
 
 ### to develop
