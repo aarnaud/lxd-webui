@@ -2,13 +2,16 @@
 var http = require('http');
 var path = require('path');
 var fs = require('fs');
-var app = require('app');
-var BrowserWindow = require('browser-window');
+// Module to control application life.
+const {app} = electron;
+// Module to create native browser window.
+const {BrowserWindow} = electron;
+const {crashReporter} = require('electron');
 
 //WARNING: INSECURE MODE
 app.commandLine.appendSwitch("ignore-certificate-errors");
 
-require('crash-reporter').start();
+crashReporter.start();
 
 var mainWindow = null;
 
@@ -45,7 +48,7 @@ function requestHandler(req, res) {
         page404 = root + '/index.html';
 
     getFile((root + file), res, page404);
-};
+}
 
 function getFile(filePath, res, page404) {
 
@@ -69,4 +72,4 @@ function getFile(filePath, res, page404) {
             });
         }
     });
-};
+}
