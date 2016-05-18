@@ -3,33 +3,33 @@ import {Injectable, Output, EventEmitter} from '@angular/core';
 @Injectable()
 export class AppConfig {
     @Output() onChangeConfig = new EventEmitter();
-    private _LXDServerUrl: string;
+    private _lxdServerUrl: string;
 
     constructor() {
         // Get LXD Server URL in localstorage
-        var LXDServerUrl = localStorage.getItem('lxd_server_url');
+        let lxdServerUrl = localStorage.getItem('lxd_server_url');
         // If LXD Server URL not found, set default URL to localhost
-        if (LXDServerUrl === null) {
-            this._LXDServerUrl = 'https://127.0.0.1:8443';
+        if (!lxdServerUrl) {
+            this._lxdServerUrl = 'https://127.0.0.1:8443';
         } else {
-            this._LXDServerUrl = LXDServerUrl;
+            this._lxdServerUrl = lxdServerUrl;
         }
     }
 
-    get LXDServerUrl(): string {
-        return this._LXDServerUrl;
+    get lxdServerUrl(): string {
+        return this._lxdServerUrl;
     }
 
-    set LXDServerUrl(value: string) {
+    set lxdServerUrl(value: string) {
         this.onChangeConfig.emit('change');
-        this._LXDServerUrl = value;
+        this._lxdServerUrl = value;
     }
 
     get LXDServer(){
-        return this._LXDServerUrl.split('/')[2];
+        return this._lxdServerUrl.split('/')[2];
     }
 
     get LXDProtocol(){
-        return this._LXDServerUrl.split('/')[0] + '//';
+        return this._lxdServerUrl.split('/')[0] + '//';
     }
 }

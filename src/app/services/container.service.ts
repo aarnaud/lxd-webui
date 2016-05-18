@@ -4,30 +4,32 @@ import {Observable} from 'rxjs/Observable';
 import {Container} from '../models/container';
 import {Operation} from '../models/operation';
 import {AppConfig} from './config.service';
+import metadata = Reflect.metadata;
+import {LxdResponse} from '../models/lxdResponse';
 
 @Injectable()
 export class ContainerService {
-    constructor(private appConfig: AppConfig, private http: Http) {
-        appConfig.onChangeConfig.subscribe( e => this.loadServerConfig());
-        this.loadServerConfig();
-    }
-
     private _protocole;
     private _lxdServer;  // URL to web api
     private _apiVersion = '1.0';  // URL to web api
     private _lxdBaseUrl;
 
-   public getContainers(): Observable<Observable<Container[]>> {
+    constructor(private appConfig: AppConfig, private http: Http) {
+        appConfig.onChangeConfig.subscribe( e => this.loadServerConfig());
+        this.loadServerConfig();
+    }
+
+    public getContainers(): Observable<Observable<Container[]>> {
         let observableBatch = [];
         return this.http.get(this._lxdBaseUrl + '/' + this._apiVersion + '/containers')
             .map(res => {
-                res.json()['metadata'].forEach(
+                (res.json() as LxdResponse).metadata.forEach(
                     (url) => observableBatch.push(this._getContainer(url))
                 );
                 return Observable.forkJoin(observableBatch);
             }).catch(this.handleError);
 
-   }
+    }
 
     public getContainer(id: string): Observable<Container> {
         return this._getContainer('/' + this._apiVersion + '/containers/' + id);
@@ -42,14 +44,14 @@ export class ContainerService {
                 'force': true,   // Force the state change (it means killing the container)
                 'stateful': false // (only valid for stop and start, defaults to false)
             })
-        ).map(res => res.json()['metadata'])
+        ).map(res => (res.json() as LxdResponse).metadata)
             .catch(this.handleError);
     }
 
     public waitOperation(operationId: string): Observable<Operation> {
         return this.http.get(
             this._lxdBaseUrl + '/' + this._apiVersion + '/operations/' + operationId + '/wait'
-        ).map((res: Response) => <Operation> res.json()['metadata'])
+        ).map((res: Response) => ((res.json() as LxdResponse).metadata as Operation))
             .catch(this.handleError);
     }
 
@@ -66,7 +68,7 @@ export class ContainerService {
                 'wait-for-websocket': true,
                 'interactive': true
             })
-        ).map(res => res.json()['metadata'])
+        ).map(res => (res.json() as LxdResponse).metadata)
             .catch(this.handleError);
     }
 
@@ -90,7 +92,7 @@ export class ContainerService {
 
     private _getContainer(url: string): Observable<Container> {
         return this.http.get(this._lxdBaseUrl + url)
-            .map((res: Response) => <Container> res.json()['metadata'])
+            .map((res: Response) => ((res.json() as LxdResponse).metadata as Container))
             .catch(this.handleError);
     }
 

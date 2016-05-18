@@ -15,7 +15,7 @@ import {ENV_PROVIDERS} from './platform/environment';
  */
 import {AppComponent} from './app/app.component';
 import {AppConfig} from './app/services/config.service';
-import {ToastyService, ToastyConfig} from "ng2-toasty/ng2-toasty";
+import {ToastyService, ToastyConfig} from 'ng2-toasty/ng2-toasty';
 
 /*
  * Bootstrap our Angular app with a top level component `App` and inject

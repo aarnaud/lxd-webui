@@ -4,29 +4,29 @@ import {EventEmitter} from 'events';
 import {AppConfig} from './services/config.service';
 
 @Component({
-    selector: 'demo-header',
+    selector: 'lxd-header',
     templateUrl: 'assets/templates/menu.component.html',
     directives: [
         CORE_DIRECTIVES
     ]
 })
 
-export class Header {
+export class HeaderComponent {
     public isCollapsed: boolean = true;
     @Input() title: string;
 
     constructor(private appConfig: AppConfig) {
     }
 
-    get LXDServerUrl(){
-        return this.appConfig.LXDServerUrl;
+    get lxdServerUrl(){
+        return this.appConfig.lxdServerUrl;
     }
 
     private onLXDUrl(event: KeyboardEvent) {
-        var LXDServerUrl = (<HTMLInputElement>event.target).value;
+        let lxdServerUrl = (<HTMLInputElement>event.target).value;
         // Record new LXD Server URL in localstorage
-        localStorage.setItem('lxd_server_url', LXDServerUrl);
+        localStorage.setItem('lxd_server_url', lxdServerUrl);
         // Apply new LXD Server URL into application configuration
-        this.appConfig.LXDServerUrl = LXDServerUrl;
+        this.appConfig.lxdServerUrl = lxdServerUrl;
     }
 }

@@ -1,3 +1,4 @@
+import {OnInit} from '@angular/core';
 import {Router} from '@angular/router-deprecated';
 import {isPresent} from '@angular/core/src/facade/lang';
 import {
@@ -23,9 +24,9 @@ import {Instruction, RouterLink} from '@angular/router-deprecated';
  * ```
  */
 @Directive({
-  selector: '[router-active], [routerActive]'
+  selector: '[lxdRouterActive]'
 })
-export class RouterActive {
+export class RouterActiveDirective implements OnInit {
   @Input() routerActive: string = undefined;
   routerActiveAttr: string = 'active';
 
@@ -34,7 +35,7 @@ export class RouterActive {
     public element: ElementRef,
     public renderer: Renderer,
     @Query(RouterLink) public routerLink: QueryList<RouterLink>,
-    @Optional() @Attribute('router-active') routerActiveAttr?: string) {
+    @Optional() @Input() routerActiveAttr: string) {
 
       this.routerActiveAttr = this._defaultAttrValue(routerActiveAttr);
   }

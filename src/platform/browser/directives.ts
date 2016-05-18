@@ -23,13 +23,13 @@ import {ROUTER_DIRECTIVES} from '@angular/router-deprecated';
 // ];
 
 // platform common directives
-import {RouterActive} from './router-active';
+import {RouterActiveDirective} from './router-active';
 
 // application_directives: directives that are global through out the application
 export const APPLICATION_DIRECTIVES = [
   ...ROUTER_DIRECTIVES,
   // ...MATERIAL_DIRECTIVES,
-  RouterActive
+  RouterActiveDirective
 ];
 
 export const DIRECTIVES = [

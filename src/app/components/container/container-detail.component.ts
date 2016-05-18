@@ -8,7 +8,7 @@ import {ToastyService} from 'ng2-toasty/ng2-toasty';
 declare var Terminal;
 
 @Component({
-    selector: 'container-detail',
+    selector: 'lxd-container-detail',
     templateUrl: 'assets/templates/container-detail.component.html'
 })
 export class ContainerDetailComponent implements OnInit {
@@ -54,7 +54,7 @@ export class ContainerDetailComponent implements OnInit {
             if (operation.status_code >= 400) {
                 this.toastyService.error(this.getToastyOptions(operation.err, operation.status));
             } else {
-                this.toastyService.success(this.getToastyOptions(null, operation.status));
+                this.toastyService.success(this.getToastyOptions(undefined, operation.status));
             }
             this.updateStatus();
         },

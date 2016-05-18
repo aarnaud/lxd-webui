@@ -10,7 +10,7 @@ import {HTTP_PROVIDERS}    from '@angular/http';
 import {ContainerService}     from './services/container.service';
 import {ContainersComponent} from './components/container/containers.component';
 import {ContainerDetailComponent} from './components/container/container-detail.component';
-import {Header} from './menu.component';
+import {HeaderComponent} from './menu.component';
 import {Toasty} from 'ng2-toasty/ng2-toasty';
 
 @Component({
@@ -18,7 +18,7 @@ import {Toasty} from 'ng2-toasty/ng2-toasty';
     templateUrl: 'assets/templates/app.component.html',
     directives: [
         ROUTER_DIRECTIVES,
-        Header,
+        HeaderComponent,
         Toasty
     ],
     providers: [
@@ -38,7 +38,7 @@ import {Toasty} from 'ng2-toasty/ng2-toasty';
     <RouteDefinition>{
         path: '/containers',
         name: 'Containers',
-        component: ContainersComponent,
+        component: ContainersComponent
     },
     <RouteDefinition>{
         path: '/container/:id',
