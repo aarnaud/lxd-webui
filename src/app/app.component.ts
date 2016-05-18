@@ -1,17 +1,25 @@
 import {Component}       from '@angular/core';
-import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS, Router, RouteDefinition} from '@angular/router-deprecated';
+import {
+    RouteConfig,
+    ROUTER_DIRECTIVES,
+    ROUTER_PROVIDERS,
+    Router,
+    RouteDefinition
+} from '@angular/router-deprecated';
 import {HTTP_PROVIDERS}    from '@angular/http';
 import {ContainerService}     from './services/container.service';
 import {ContainersComponent} from './components/container/containers.component';
 import {ContainerDetailComponent} from './components/container/container-detail.component';
 import {Header} from './menu.component';
+import {Toasty} from 'ng2-toasty/ng2-toasty';
 
 @Component({
     selector: 'lxd-app',
     templateUrl: 'assets/templates/app.component.html',
     directives: [
         ROUTER_DIRECTIVES,
-        Header
+        Header,
+        Toasty
     ],
     providers: [
         HTTP_PROVIDERS,

@@ -210,7 +210,7 @@ module.exports = {
     new CopyWebpackPlugin([
       {from: 'src/assets', to: 'assets'},
       {from: 'node_modules/bootstrap/dist/css/bootstrap.min.css', to: 'vendors/bootstrap/css/'},
-      {from: 'node_modules/ng2-toastr/bundles/ng2-toastr.min.css', to: 'vendors/ng2-toastr/'},
+      {from: 'node_modules/ng2-toasty/ng2-toasty.css', to: 'vendors/ng2-toasty/'},
       {from: 'node_modules/material-design-icons/iconfont', to: 'vendors/material-icons/'}
     ]),
 

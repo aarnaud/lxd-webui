@@ -4,12 +4,11 @@ import {Container} from '../../models/container';
 import {ContainerService} from '../../services/container.service';
 import {Observable}     from 'rxjs/Observable';
 import {AppConfig} from '../../services/config.service';
-import {ToastsManager} from 'ng2-toastr/ng2-toastr';
+import {ToastyService} from 'ng2-toasty/ng2-toasty';
 
 @Component({
     selector: 'lxd-containers',
-    templateUrl: 'assets/templates/containers.component.html',
-    providers: [ToastsManager]
+    templateUrl: 'assets/templates/containers.component.html'
 })
 export class ContainersComponent implements OnInit {
     public title = 'LXD WebUI';
@@ -22,12 +21,12 @@ export class ContainersComponent implements OnInit {
 
     constructor(private appConfig: AppConfig, private _router: Router,
                 private _containerService: ContainerService,
-                private toastr: ToastsManager) {
+                private toastyService: ToastyService) {
         appConfig.onChangeConfig.subscribe( e => this.getContainers() );
     }
 
     onSelect(container: Container) {
-        //this.selectedContainer = container;
+        // this.selectedContainer = container;
         let link = ['ContainerDetail', {id: container.name}];
         this._router.navigate(link);
     }
@@ -37,7 +36,7 @@ export class ContainersComponent implements OnInit {
             .subscribe((forkJoin: Observable<Container[]>) => {
                 forkJoin.subscribe((containers: Container[]) => this.containers = containers);
             },
-            err => this.toastr.error(err));
+            err => this.toastyService.error(this.getToastyOptions(err)));
     }
 
     public isRunning(container: Container): boolean {
@@ -46,5 +45,14 @@ export class ContainersComponent implements OnInit {
 
     public isStopped(container: Container): boolean {
         return (container.status === 'Stopped');
+    }
+
+    getToastyOptions(message: string = '', title: string = '') {
+        return {
+            title: title,
+            msg: message,
+            timeout: 3000,
+            theme: 'material'
+        };
     }
 }

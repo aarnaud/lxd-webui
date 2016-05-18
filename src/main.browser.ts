@@ -15,6 +15,7 @@ import {ENV_PROVIDERS} from './platform/environment';
  */
 import {AppComponent} from './app/app.component';
 import {AppConfig} from './app/services/config.service';
+import {ToastyService, ToastyConfig} from "ng2-toasty/ng2-toasty";
 
 /*
  * Bootstrap our Angular app with a top level component `App` and inject
@@ -22,7 +23,9 @@ import {AppConfig} from './app/services/config.service';
  */
 export function main(initialHmrState?: any): Promise<any> {
     let APP_PROVIDERS = [
-        AppConfig
+        AppConfig,
+        ToastyService,
+        ToastyConfig
     ];
 
     return bootstrap(AppComponent, [
@@ -30,7 +33,7 @@ export function main(initialHmrState?: any): Promise<any> {
         ...PROVIDERS,
         ...DIRECTIVES,
         ...PIPES,
-        ...APP_PROVIDERS,
+        ...APP_PROVIDERS
     ])
         .catch(err => console.error(err));
 
