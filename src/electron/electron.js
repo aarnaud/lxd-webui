@@ -18,6 +18,7 @@ const {dialog} = electron;
 // crashReporter.start();
 
 var mainWindow = null;
+var allowDomains = [];
 
 app.on('window-all-closed', function() {
     if(process.platform != 'darwin') {
@@ -27,7 +28,27 @@ app.on('window-all-closed', function() {
 
 app.on('certificate-error', (event, webContents, url, error, certificate, callback) => {
     event.preventDefault();
-    callback(true);
+    var domain = url.split("/")[2];
+
+    if(allowDomains.indexOf(domain) !== -1){
+        callback(true);
+        return;
+    }
+
+    var choice = dialog.showMessageBox({
+        type: "question",
+        title: "Certificate error",
+        message: "Certificate error. Do you want continue ?",
+        detail: error + "\non\n" + url,
+        buttons: ['No', 'Yes']
+    });
+    if(!( choice == 0 )){
+        allowDomains.push(domain);
+        callback(true);
+        return;
+    }
+
+    callback(false);
 });
 
 app.on('select-client-certificate', (event, webContents, url, list, callback) => {
