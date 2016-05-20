@@ -6268,7 +6268,7 @@ Terminal.on = on;
 Terminal.off = off;
 Terminal.cancel = cancel;
 
-if (typeof module !== 'undefined') {
+if (typeof module !== 'undefined' && typeof process !== 'undefined' && !process.versions.electron) {
   module.exports = Terminal;
 } else {
   this.Terminal = Terminal;
