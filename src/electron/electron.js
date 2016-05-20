@@ -13,7 +13,7 @@ const {crashReporter} = electron;
 const {dialog} = electron;
 
 //WARNING: INSECURE MODE
-app.commandLine.appendSwitch("ignore-certificate-errors");
+//app.commandLine.appendSwitch("ignore-certificate-errors");
 
 // crashReporter.start();
 
@@ -23,6 +23,11 @@ app.on('window-all-closed', function() {
     if(process.platform != 'darwin') {
         app.quit();
     }
+});
+
+app.on('certificate-error', (event, webContents, url, error, certificate, callback) => {
+    event.preventDefault();
+    callback(true);
 });
 
 app.on('select-client-certificate', (event, webContents, url, list, callback) => {
