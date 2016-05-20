@@ -10,6 +10,8 @@ const {BrowserWindow} = electron;
 // Module to reporte application crash
 const {crashReporter} = electron;
 
+const {dialog} = electron;
+
 //WARNING: INSECURE MODE
 app.commandLine.appendSwitch("ignore-certificate-errors");
 
@@ -23,6 +25,22 @@ app.on('window-all-closed', function() {
     }
 });
 
+app.on('select-client-certificate', (event, webContents, url, list, callback) => {
+    event.preventDefault();
+    var crtNames = [];
+    list.forEach(function (element, index, array) {
+        crtNames.push(element.issuerName);
+    });
+    var choice = dialog.showMessageBox({
+        type: "question",
+        title: "Select authentification certificate",
+        message: "Please select your authentification certificate.",
+        detail: "If you don't have certificate you must import this.",
+        buttons: crtNames
+    });
+    callback(list[choice]);
+});
+
 app.on('ready', function() {
     mainWindow = new BrowserWindow({
         width: 1200,
@@ -30,6 +48,24 @@ app.on('ready', function() {
         icon: __dirname + '/lxd-logo.png',
         'node-integration': false
     });
+
+    var crtFiles = dialog.showOpenDialog({
+        title: "Select authentification certificate",
+        properties: ['openFile'],
+        filters: [
+            {name: 'SSL Client Certificate', extensions: ['p12', 'pfx']}
+        ]
+    });
+
+    if(crtFiles){
+        app.importCertificate({
+            'certificate': crtFiles[0],
+            'password': ''
+        }, function(result) {
+            console.log(result);
+        });
+    }
+
 
     var server = http.createServer(requestHandler).listen(8907);
 
