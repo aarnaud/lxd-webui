@@ -34,3 +34,12 @@ header .input-group-addon i {
     }
 }
 /****************************/
+
+.logo {
+    height: 40px;
+    width: 40px;
+    background-image: url("../img/lxd-logo.png");
+    background-size: 100% 100%;
+    margin: 5px;
+    display: inline-block;
+}

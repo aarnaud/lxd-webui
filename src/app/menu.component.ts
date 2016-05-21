@@ -2,12 +2,14 @@ import {Component, Input, Output} from '@angular/core';
 import {CORE_DIRECTIVES} from '@angular/common';
 import {EventEmitter} from 'events';
 import {AppConfig} from './services/config.service';
+import {CollapseDirective} from 'ng2-bootstrap/ng2-bootstrap';
 
 @Component({
     selector: 'lxd-header',
     templateUrl: 'assets/templates/menu.component.html',
     directives: [
-        CORE_DIRECTIVES
+        CORE_DIRECTIVES,
+        CollapseDirective
     ]
 })
 
