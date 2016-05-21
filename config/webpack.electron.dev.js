@@ -17,11 +17,13 @@ var ForkCheckerPlugin = require('awesome-typescript-loader').ForkCheckerPlugin;
  */
 const ENV = process.env.ENV = process.env.NODE_ENV = 'development';
 const HMR = helpers.hasProcessFlag('hot');
+const HOST = process.env.HOST || '0.0.0.0';
+const PORT = process.env.PORT || 8907;
 const METADATA = {
   title: 'LXD-WebUI',
   baseUrl: '/',
-  host: 'localhost',
-  port: 8907,
+  host: HOST,
+  port: PORT,
   ENV: ENV,
   HMR: HMR
 };
