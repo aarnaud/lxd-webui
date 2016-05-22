@@ -76,7 +76,7 @@ app.on('ready', function() {
     });
 
     var crtFiles = dialog.showOpenDialog({
-        title: "Select authentification certificate",
+        title: "Select authentification certificate (without password)",
         properties: ['openFile'],
         filters: [
             {name: 'SSL Client Certificate', extensions: ['p12', 'pfx']}
@@ -86,9 +86,18 @@ app.on('ready', function() {
     if(crtFiles){
         app.importCertificate({
             'certificate': crtFiles[0],
-            'password': ''
+            'password': '' //TODO: prompt password
         }, function(result) {
-            console.log(result);
+            if(result !== 0){
+                dialog.showMessageBox({
+                    type: "error",
+                    title: "Import certificate failed",
+                    message: "Failed to import certificate.",
+                    detail: "Code: " + result + ".\n" +
+                    "Check on: https://code.google.com/p/chromium/codesearch#chromium/src/net/base/net_error_list.h",
+                    buttons: ['Ok']
+                });
+            }
         });
     }
 
