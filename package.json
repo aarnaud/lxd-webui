@@ -48,24 +48,24 @@
     "lint": "tslint 'src/**/*.ts'"
   },
   "dependencies": {
-    "@angular/http": "2.0.0-rc.1",
     "@angular/common": "2.0.0-rc.1",
     "@angular/compiler": "2.0.0-rc.1",
     "@angular/core": "2.0.0-rc.1",
+    "@angular/http": "2.0.0-rc.1",
     "@angular/platform-browser": "2.0.0-rc.1",
     "@angular/platform-browser-dynamic": "2.0.0-rc.1",
     "@angular/platform-server": "2.0.0-rc.1",
     "@angular/router": "2.0.0-rc.1",
     "@angular/router-deprecated": "2.0.0-rc.1",
-    "core-js": "^2.2.2",
-    "normalize.css": "^4.1.1",
-    "rxjs": "5.0.0-beta.6",
-    "zone.js": "~0.6.12",
+    "angular2-modal": "^1.0.0",
     "bootstrap": "3.3.6",
+    "core-js": "^2.2.2",
     "material-design-icons": "2.2.3",
     "ng2-bootstrap": "1.0.16",
-    "ng2-modal": "0.0.3",
-    "ng2-toasty": "^1.7.2"
+    "ng2-toasty": "^1.7.2",
+    "normalize.css": "^4.1.1",
+    "rxjs": "5.0.0-beta.6",
+    "zone.js": "~0.6.12"
   },
   "devDependencies": {
     "angular2-hmr": "~0.7.0",

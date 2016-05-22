@@ -16,6 +16,8 @@ import {ENV_PROVIDERS} from './platform/environment';
 import {AppComponent} from './app/app.component';
 import {AppConfig} from './app/services/config.service';
 import {ToastyService, ToastyConfig} from 'ng2-toasty/ng2-toasty';
+import {MODAL_BROWSER_PROVIDERS} from 'angular2-modal/platform-browser';
+
 
 /*
  * Bootstrap our Angular app with a top level component `App` and inject
@@ -25,7 +27,8 @@ export function main(initialHmrState?: any): Promise<any> {
     let APP_PROVIDERS = [
         AppConfig,
         ToastyService,
-        ToastyConfig
+        ToastyConfig,
+        MODAL_BROWSER_PROVIDERS
     ];
 
     return bootstrap(AppComponent, [
