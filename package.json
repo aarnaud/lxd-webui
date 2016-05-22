@@ -1,0 +1,10 @@
+{
+  "name": "lxd-webui",
+  "main": "electron.js",
+  "version": "0.1.0",
+  "description": "LXD web ui client",
+  "author": {
+    "name": "Anthony ARNAUD",
+    "email": "lxd-webui@anthony-arnaud.fr"
+  }
+}

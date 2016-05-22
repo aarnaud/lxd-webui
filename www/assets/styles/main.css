@@ -43,18 +43,3 @@ header .input-group-addon i {
     margin: 5px;
     display: inline-block;
 }
-
-.header-title-action {
-    line-height: 60px;
-}
-
-.header-title-action, button {
-    display: inline-block;
-    vertical-align: middle;
-}
-
-h2.container-title{
-    display: inline-block;
-    margin-right: 10px;
-    vertical-align: middle;
-}
