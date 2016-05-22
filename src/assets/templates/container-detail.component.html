@@ -1,26 +1,46 @@
 <div *ngIf="container">
-    <h2>{{container.name}}</h2>
-    <div>
-        <span>Arch: {{container.architecture}}</span>
-        <span>Status: {{container.status}}</span>
-    </div>
-    <div>
+    <div class="header-title-action">
+        <h2 class="container-title">{{container.name}}</h2>
         <button class="btn btn-primary" (click)="execAction()">
-            <i class="material-icons md-24">tv</i>
+            <i class="material-icons md-18">tv</i>
         </button>
         <button class="btn btn-primary" (click)="startAction()">
-            <i class="material-icons md-24">play_arrow</i>
+            <i class="material-icons md-18">play_arrow</i>
         </button>
         <button class="btn btn-primary" (click)="stopAction()">
-            <i class="material-icons md-24">stop</i>
+            <i class="material-icons md-18">stop</i>
         </button>
         <button class="btn btn-primary" (click)="restartAction()">
-            <i class="material-icons md-24">refresh</i>
+            <i class="material-icons md-18">refresh</i>
         </button>
         <button class="btn btn-primary" (click)="deleteAction()">
-            <i class="material-icons md-24">delete</i>
+            <i class="material-icons md-18">delete</i>
         </button>
-        <!--<input [(ngModel)]="container.name" placeholder="name"/>-->
+    </div>
+    <div>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th data-field="arch">Arch</th>
+                <th data-field="profiles">Profiles</th>
+                <th data-field="created_at">Created at</th>
+                <th data-field="stateful">Stateful</th>
+                <th data-field="ephemeral">Ephemeral</th>
+                <th data-field="status">Status</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr>
+                <td>{{container.architecture}}</td>
+                <td>{{container.profiles}}</td>
+                <td>{{container.created_at}}</td>
+                <td><i class="material-icons">{{container.stateful ? 'check_box':'check_box_outline_blank'}}</i></td>
+                <td><i class="material-icons">{{container.ephemeral ? 'check_box':'check_box_outline_blank'}}</i></td>
+                <td><label class="label" [ngClass]="{'label-success': isRunning(container), 'label-danger': isStopped(container), 'label-warning': (!isRunning(container)&&!isStopped(container))}">{{container.status}}</label></td>
+            </tr>
+            </tbody>
+        </table>
     </div>
     <div id="console"></div>
 </div>

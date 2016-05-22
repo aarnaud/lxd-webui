@@ -2,6 +2,9 @@
     <thead>
     <tr>
         <th data-field="name">Name</th>
+        <th data-field="arch">Arch</th>
+        <th data-field="stateful">Stateful</th>
+        <th data-field="ephemeral">Ephemeral</th>
         <th data-field="status">Status</th>
     </tr>
     </thead>
@@ -11,6 +14,9 @@
         (click)="onSelect(container)"
         [class.selected]="container === selectedContainer">
         <td>{{container.name}}</td>
+        <td>{{container.architecture}}</td>
+        <td><i class="material-icons">{{container.stateful ? 'check_box':'check_box_outline_blank'}}</i></td>
+        <td><i class="material-icons">{{container.ephemeral ? 'check_box':'check_box_outline_blank'}}</i></td>
         <td><label class="label" [ngClass]="{'label-success': isRunning(container), 'label-danger': isStopped(container), 'label-warning': (!isRunning(container)&&!isStopped(container))}">{{container.status}}</label></td>
     </tr>
     </tbody>
