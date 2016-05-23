@@ -9,6 +9,8 @@ import {Toasty, ToastyService} from 'ng2-toasty/ng2-toasty';
 import {Modal, BS_MODAL_PROVIDERS} from 'angular2-modal/plugins/bootstrap';
 import {AppConfig} from './services/config.service';
 import {DialogRef} from 'angular2-modal/angular2-modal';
+import {ImagesComponent} from './components/container/images.component';
+import {ProfilesComponent} from './components/container/profiles.component';
 
 
 @Component({
@@ -28,7 +30,9 @@ import {DialogRef} from 'angular2-modal/angular2-modal';
 
 @Routes([
     {path: '/containers', component: ContainersComponent},
-    {path: '/container/:id',  component: ContainerDetailComponent}
+    {path: '/container/:id',  component: ContainerDetailComponent},
+    {path: '/images',  component: ImagesComponent},
+    {path: '/profiles',  component: ProfilesComponent}
 ])
 
 export class AppComponent implements OnInit {
