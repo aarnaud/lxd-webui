@@ -14,7 +14,7 @@ lxc info lxd-webui &> /dev/null || {
         echo 'deb-src https://deb.nodesource.com/node_4.x trusty main' >> /etc/apt/sources.list.d/nodesource.list
 EOF
     lxc exec ${CONTAINER_NAME} -- apt-get update
-    lxc exec ${CONTAINER_NAME} -- apt-get install -y nodejs graphicsmagick imagemagick icnsutils ruby-dev build-essential
+    lxc exec ${CONTAINER_NAME} -- apt-get install -y nodejs git graphicsmagick imagemagick icnsutils ruby-dev build-essential
     lxc exec ${CONTAINER_NAME} -- gem install fpm
 }
 
