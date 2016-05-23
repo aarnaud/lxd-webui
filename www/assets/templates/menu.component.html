@@ -8,17 +8,21 @@
                 <span class="icon-bar"></span>
             </button>
             <span class="navbar-brand logo"></span>
-            <a class="navbar-brand visible-xs" [routerLink]="['Home']">{{title}}</a>
+            <span class="navbar-brand visible-xs">{{title}}</span>
         </div>
         <nav class="hidden-xs hidden-xs-down">
             <ul class="nav navbar-nav">
-                <li class="nav-item"><a role="button" class="navbar-brand" [routerLink]="['Home']">{{title}}</a></li>
-                <li class="nav-item"><a class="nav-link" [routerLink]="['Containers']">Containers</a></li>
+                <li class="nav-item"><span class="navbar-brand">{{title}}</span></li>
+                <li class="nav-item"><a class="nav-link" [routerLink]="['/containers']">Containers</a></li>
+                <li class="nav-item"><a class="nav-link" [routerLink]="['/images']">Images</a></li>
+                <li class="nav-item"><a class="nav-link" [routerLink]="['/profiles']">Profiles</a></li>
             </ul>
         </nav>
         <nav class="visible-xs hidden-md-up">
             <ul class="nav nav-pills nav-stacked scrollable-menu" [collapse]="isCollapsed" (click)="isCollapsed = !isCollapsed; true">
-                <li class="nav-item"><a class="nav-link" [routerLink]="['Containers']">Containers</a></li>
+                <li class="nav-item"><a class="nav-link" [routerLink]="['/containers']">Containers</a></li>
+                <li class="nav-item"><a class="nav-link" [routerLink]="['/images']">Images</a></li>
+                <li class="nav-item"><a class="nav-link" [routerLink]="['/profiles']">Profiles</a></li>
             </ul>
         </nav>
         <nav class="navbar-form navbar-right hidden-xs hidden-xs-down">
