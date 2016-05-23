@@ -14,11 +14,24 @@
     <link href="<%= webpackConfig.metadata.baseUrl %>vendors/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!--Import app style -->
     <link href="<%= webpackConfig.metadata.baseUrl %>assets/styles/main.css" rel="stylesheet">
+
+    <!-- PACE -->
+    <link href="<%= webpackConfig.metadata.baseUrl %>vendors/pace/themes/orange/pace-theme-flash.css" rel="stylesheet" />
+    <script src="<%= webpackConfig.metadata.baseUrl %>vendors/pace/pace.min.js"></script>
 </head>
 
 <!-- 3. Display the application -->
 <body>
-<lxd-app>Loading...</lxd-app>
+    <lxd-app>
+        <div class="loader-wrapper">
+            <div class="loader">
+                <div class="box"></div>
+                <div class="box"></div>
+                <div class="box"></div>
+                <div class="box"></div>
+            </div>
+        </div>
+    </lxd-app>
     <script src="<%= webpackConfig.metadata.baseUrl %>assets/js/term.js"></script>
 
     <% if (webpackConfig.metadata.ENV === 'development') { %>

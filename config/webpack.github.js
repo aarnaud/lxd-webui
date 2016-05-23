@@ -249,7 +249,9 @@ module.exports = {
       {from: 'src/assets', to: 'assets'},
       {from: 'node_modules/bootstrap/dist/css/bootstrap.min.css', to: 'vendors/bootstrap/css/'},
       {from: 'node_modules/ng2-toasty/ng2-toasty.css', to: 'vendors/ng2-toasty/'},
-      {from: 'node_modules/material-design-icons/iconfont', to: 'vendors/material-icons/'}
+      {from: 'node_modules/material-design-icons/iconfont', to: 'vendors/material-icons/'},
+      {from: 'node_modules/pace/pace.min.js', to: 'vendors/pace/'},
+      {from: 'node_modules/pace/themes/orange/pace-theme-flash.css', to: 'vendors/pace/themes/orange/'}
     ]),
 
     // Plugin: HtmlWebpackPlugin
