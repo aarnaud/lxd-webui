@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router-deprecated';
+import {Router} from '@angular/router';
 import {Container} from '../../models/container';
 import {ContainerService} from '../../services/container.service';
 import {Observable}     from 'rxjs/Observable';
@@ -19,20 +19,19 @@ export class ContainersComponent implements OnInit {
         this.getContainers();
     }
 
-    constructor(private appConfig: AppConfig, private _router: Router,
-                private _containerService: ContainerService,
+    constructor(private appConfig: AppConfig,
+                private router: Router,
+                private containerService: ContainerService,
                 private toastyService: ToastyService) {
         appConfig.onChangeConfig.subscribe( e => this.getContainers() );
     }
 
     onSelect(container: Container) {
-        // this.selectedContainer = container;
-        let link = ['ContainerDetail', {id: container.name}];
-        this._router.navigate(link);
+        this.router.navigate(['container', container.name]);
     }
 
     public getContainers(): void {
-        this._containerService.getContainers()
+        this.containerService.getContainers()
             .subscribe((forkJoin: Observable<Container[]>) => {
                 forkJoin.subscribe((containers: Container[]) => this.containers = containers);
             },

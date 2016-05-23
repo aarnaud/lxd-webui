@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {RouteParams} from '@angular/router-deprecated';
+import {Component} from '@angular/core';
+import {OnActivate, Router, RouteSegment} from '@angular/router';
 import {Container} from '../../models/container';
 import {ContainerService} from '../../services/container.service';
 import {ToastyService} from 'ng2-toasty/ng2-toasty';
@@ -11,17 +11,17 @@ declare var Terminal;
     selector: 'lxd-container-detail',
     templateUrl: 'assets/templates/container-detail.component.html'
 })
-export class ContainerDetailComponent implements OnInit {
+export class ContainerDetailComponent implements OnActivate {
     container: Container;
 
-    constructor(private _containerService: ContainerService,
-                private _routeParams: RouteParams,
+    constructor(private containerService: ContainerService,
+                private router: Router,
                 private toastyService: ToastyService) {
     }
 
-    ngOnInit(): any {
-        let id = this._routeParams.get('id');
-        this._containerService.getContainer(id)
+    routerOnActivate(curr: RouteSegment): void {
+        let id = curr.getParam('id');
+        this.containerService.getContainer(id)
             .subscribe(
                 container => this.container = container,
                 err => this.toastyService.error(this.getToastyOptions(err))
@@ -29,28 +29,28 @@ export class ContainerDetailComponent implements OnInit {
     }
 
     stopAction() {
-        this._containerService.setState(this.container.name, 'stop').subscribe(
+        this.containerService.setState(this.container.name, 'stop').subscribe(
             operation => this.waitOperation(operation.id),
             err => this.toastyService.error(this.getToastyOptions(err))
         );
     }
 
     startAction() {
-        this._containerService.setState(this.container.name, 'start').subscribe(
+        this.containerService.setState(this.container.name, 'start').subscribe(
             operation => this.waitOperation(operation.id),
             err => this.toastyService.error(this.getToastyOptions(err))
         );
     }
 
     restartAction() {
-        this._containerService.setState(this.container.name, 'restart').subscribe(
+        this.containerService.setState(this.container.name, 'restart').subscribe(
             operation => this.waitOperation(operation.id),
             err => this.toastyService.error(this.getToastyOptions(err))
         );
     }
 
     waitOperation(operationId: string) {
-        this._containerService.waitOperation(operationId).subscribe(operation => {
+        this.containerService.waitOperation(operationId).subscribe(operation => {
             if (operation.status_code >= 400) {
                 this.toastyService.error(this.getToastyOptions(operation.err, operation.status));
             } else {
@@ -63,9 +63,9 @@ export class ContainerDetailComponent implements OnInit {
     }
 
     execAction() {
-        this._containerService.exec(this.container.name, ['bash']).subscribe(
+        this.containerService.exec(this.container.name, ['bash']).subscribe(
             metadata => {
-                let sock = this._containerService.operationWebsocket(
+                let sock = this.containerService.operationWebsocket(
                     metadata.id, metadata.metadata.fds[0]
                 );
                 sock.onopen = function (e) {
@@ -110,7 +110,7 @@ export class ContainerDetailComponent implements OnInit {
     }
 
     deleteAction() {
-        this._containerService.delete(this.container.name).subscribe(
+        this.containerService.delete(this.container.name).subscribe(
             res => {
             },
             err => this.toastyService.error(this.getToastyOptions(err))
@@ -118,7 +118,7 @@ export class ContainerDetailComponent implements OnInit {
     }
 
     updateStatus() {
-        this._containerService.getContainer(this.container.name).subscribe(
+        this.containerService.getContainer(this.container.name).subscribe(
             res => this.container = res,
             err => this.toastyService.error(this.getToastyOptions(err))
         );

@@ -1,11 +1,5 @@
-import {Component, ViewContainerRef}       from '@angular/core';
-import {
-    RouteConfig,
-    ROUTER_DIRECTIVES,
-    ROUTER_PROVIDERS,
-    Router,
-    RouteDefinition
-} from '@angular/router-deprecated';
+import {Component, ViewContainerRef, OnInit}       from '@angular/core';
+import {Router, ROUTER_DIRECTIVES, Routes} from '@angular/router';
 import {HTTP_PROVIDERS}    from '@angular/http';
 import {ContainerService}     from './services/container.service';
 import {ContainersComponent} from './components/container/containers.component';
@@ -28,38 +22,29 @@ import {DialogRef} from 'angular2-modal/angular2-modal';
     ],
     providers: [
         HTTP_PROVIDERS,
-        ROUTER_PROVIDERS,
         ContainerService
     ]
 })
 
-@RouteConfig([
-    <RouteDefinition>{
-        path: '/',
-        name: 'Home',
-        component: ContainersComponent,
-        useAsDefault: true
-    },
-    <RouteDefinition>{
-        path: '/containers',
-        name: 'Containers',
-        component: ContainersComponent
-    },
-    <RouteDefinition>{
-        path: '/container/:id',
-        name: 'ContainerDetail',
-        component: ContainerDetailComponent
-    }
+@Routes([
+    {path: '/containers', component: ContainersComponent},
+    {path: '/container/:id',  component: ContainerDetailComponent}
 ])
 
-export class AppComponent {
+export class AppComponent implements OnInit {
     title: string = 'LXD WebUI';
 
-    constructor(private appConfig: AppConfig, private toastyService: ToastyService,
+    constructor(private appConfig: AppConfig,
+                private router: Router,
+                private toastyService: ToastyService,
                 public modal: Modal, viewContainer: ViewContainerRef) {
         modal.defaultViewContainer = viewContainer;
         appConfig.onChangeConfig.subscribe(e => this.checkLxdConnection());
         this.checkLxdConnection();
+    }
+
+    ngOnInit() {
+        this.router.navigate(['/containers']);
     }
 
     checkLxdConnection() {

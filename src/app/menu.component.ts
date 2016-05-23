@@ -1,6 +1,6 @@
 import {Component, Input, Output} from '@angular/core';
 import {CORE_DIRECTIVES} from '@angular/common';
-import {EventEmitter} from 'events';
+import {ROUTER_DIRECTIVES} from '@angular/router';
 import {AppConfig} from './services/config.service';
 import {CollapseDirective} from 'ng2-bootstrap/ng2-bootstrap';
 
@@ -9,6 +9,7 @@ import {CollapseDirective} from 'ng2-bootstrap/ng2-bootstrap';
     templateUrl: 'assets/templates/menu.component.html',
     directives: [
         CORE_DIRECTIVES,
+        ROUTER_DIRECTIVES,
         CollapseDirective
     ]
 })

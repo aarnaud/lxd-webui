@@ -96,6 +96,10 @@ header.navbar-inverse{
     background-color: #CDCDCD;
 }
 
+.navbar-inverse .nav>li>.router-link-active{
+    color: white;
+    background-color: #CDCDCD;
+}
 
 header .input-group-addon i {
     font-size: 20px;
