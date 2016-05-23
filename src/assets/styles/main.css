@@ -93,6 +93,7 @@ header.navbar-inverse{
 
 .navbar-inverse .nav>li>.nav-link:hover{
     color: white;
+    background-color: #CDCDCD;
 }
 
 
