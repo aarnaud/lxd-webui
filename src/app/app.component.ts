@@ -71,7 +71,15 @@ export class AppComponent {
     }
 
     onSuccessConnection(result) {
-        this.toastyService.success('Connection established');
+        if (result.metadata && result.metadata.auth !== 'trusted') {
+            this.openModalUntrusted();
+            return;
+        }
+        this.toastyService.success({
+            title: 'Connection established',
+            timeout: 3000,
+            theme: 'material'
+        });
     }
 
     onFailConnection(error: string) {
@@ -135,6 +143,23 @@ export class AppComponent {
     <li>The URL API response don't match with LXD response</li>
     <li>Please check this URL : 
         <a href="${this.appConfig.lxdServerUrl}" target="_blank">${this.appConfig.lxdServerUrl}</a>
+    </li>
+</ul>
+                    `)
+            .open();
+    }
+
+    openModalUntrusted() {
+        this.modal.alert()
+            .size('lg')
+            .showClose(false)
+            .isBlocking(true)
+            .title('You arn\'t authenticated')
+            .message(`
+<ul>
+    <li>Please check your client certificate in your brower</li>
+    <li>Please check your client certificate is allowed in LXD server with :
+        <code>lxc config trust list</code>
     </li>
 </ul>
                     `)
