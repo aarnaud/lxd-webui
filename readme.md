@@ -4,6 +4,11 @@
 
 ![Screenshot-details](doc/img/screenshot-details.png)
 
+
+## Release builds
+
+**The release builds of static webapp is available on https://github.com/aarnaud/lxd-webui/releases**
+
 ## Requirements
 
 ### to develop
