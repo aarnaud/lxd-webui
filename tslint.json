@@ -138,7 +138,7 @@
     ],
     "semicolon": [true, "always"],
     "variable-name": [
-      true,
+      false,
       "check-format",
       "allow-leading-underscore",
       "ban-keywords"
