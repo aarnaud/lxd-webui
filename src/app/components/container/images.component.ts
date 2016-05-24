@@ -26,7 +26,7 @@ export class ImagesComponent implements OnInit {
     }
 
     onSelect(image: Image) {
-        this.router.navigate(['image', image.fingerprint]);
+        //this.router.navigate(['image', image.fingerprint]);
     }
 
     public getImages(): void {
