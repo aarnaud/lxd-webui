@@ -27,8 +27,7 @@ export class HeaderComponent {
 
     private onLXDUrl(event: KeyboardEvent) {
         let lxdServerUrl = (<HTMLInputElement>event.target).value;
-        // Record new LXD Server URL in localstorage
-        localStorage.setItem('lxd_server_url', lxdServerUrl);
+
         // Apply new LXD Server URL into application configuration
         this.appConfig.lxdServerUrl = lxdServerUrl;
     }

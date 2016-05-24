@@ -32,6 +32,8 @@ export class AppConfig {
 
     set lxdServerUrl(value: string) {
         this._lxdServerUrl = value;
+        // Record new LXD Server URL in localstorage
+        localStorage.setItem('lxd_server_url', value);
         this.generateBaseUrl();
     }
 
