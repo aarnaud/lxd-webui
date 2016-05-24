@@ -44,7 +44,8 @@ export class ContainerService {
             .catch(this.handleError);
     }
 
-    public exec(id: string, cmd: string[]): Observable<Operation> {
+    public exec(id: string, cmd: string[],
+                width: number = 80, height: number = 25): Observable<Operation> {
         return this.http.post(`${this.conf.lxdBaseUrl}/containers/${id}/exec`,
             JSON.stringify({
                 'command': cmd,
@@ -54,7 +55,9 @@ export class ContainerService {
                     'USER': 'root'
                 },
                 'wait-for-websocket': true,
-                'interactive': true
+                'interactive': true,
+                'width': width,
+                'height': height
             })
         ).map(res => (res.json() as LxdResponse).metadata)
             .catch(this.handleError);

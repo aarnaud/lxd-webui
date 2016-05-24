@@ -172,3 +172,9 @@ ul.image-alias {
 .table>tbody>tr>td {
     vertical-align: middle;
 }
+
+/** Use to process the term.js size **/
+#console {
+    width: 100%;
+    padding-left: 2.9%;
+}
