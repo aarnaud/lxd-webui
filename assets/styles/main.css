@@ -6,7 +6,6 @@ html, body {
 /* https://codepen.io/oliverholretz/pen/ojjVNy */
 * {
     margin: 0;
-    padding: 0;
     box-sizing: border-box;
 }
 
@@ -162,4 +161,20 @@ h2.container-title{
     display: inline-block;
     margin-right: 10px;
     vertical-align: middle;
+}
+
+ul.image-alias {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.table>tbody>tr>td {
+    vertical-align: middle;
+}
+
+/** Use to process the term.js size **/
+#console {
+    width: 100%;
+    padding-left: 2.9%;
 }
