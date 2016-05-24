@@ -162,3 +162,13 @@ h2.container-title{
     margin-right: 10px;
     vertical-align: middle;
 }
+
+ul.image-alias {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.table>tbody>tr>td {
+    vertical-align: middle;
+}

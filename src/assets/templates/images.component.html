@@ -24,7 +24,7 @@
             (click)="onSelect(image)"
             [class.selected]="image === selectedImage">
             <td>
-                <ul>
+                <ul class="image-alias">
                     <li *ngFor="let alias of image.aliases">
                         {{alias.name}}
                     </li>
