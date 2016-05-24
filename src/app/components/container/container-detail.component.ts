@@ -63,17 +63,17 @@ export class ContainerDetailComponent implements OnActivate {
     }
 
     execAction() {
-        
-        let width = document.getElementById("console").offsetWidth;
+        let width = document.getElementById('console').offsetWidth;
         // On Ubuntu 16.04,
-        // term has with of 572 pixel and height of 314 pixel, and its geometry is 80x24, based on xwininfo
+        // term has with of 572 pixel and height of 314 pixel, and its geometry is 80x24,
+        // based on xwininfo
         const TWIDTH = 572;
         const THEIGHT = 314;
         const TCOLS = 80;
         const TROWS = 24;
-        let height = width/(TWIDTH/THEIGHT); // Display aspect ratio;
-        let termCols = Number((width/(TWIDTH/TCOLS)).toFixed(0));
-        let termRows = Number((height/(THEIGHT/TROWS)).toFixed(0));
+        let height = width / ( TWIDTH / THEIGHT ); // Display aspect ratio;
+        let termCols = Number((width / ( TWIDTH / TCOLS )).toFixed(0));
+        let termRows = Number(( height / ( THEIGHT / TROWS )).toFixed(0));
 
         this.containerService.exec(this.container.name, ['bash'], termCols, termRows).subscribe(
             metadata => {
