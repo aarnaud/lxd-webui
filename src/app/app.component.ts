@@ -1,4 +1,4 @@
-import {Component, ViewContainerRef, OnInit}       from '@angular/core';
+import {Component, ViewContainerRef}       from '@angular/core';
 import {Router, ROUTER_DIRECTIVES, Routes} from '@angular/router';
 import {HTTP_PROVIDERS}    from '@angular/http';
 import {ContainerService}     from './services/container.service';
@@ -31,13 +31,14 @@ import {ImagesService} from './services/images.service';
 })
 
 @Routes([
+    {path: '/', component: ContainersComponent},
     {path: '/containers', component: ContainersComponent},
     {path: '/container/:id',  component: ContainerDetailComponent},
     {path: '/images',  component: ImagesComponent},
     {path: '/profiles',  component: ProfilesComponent}
 ])
 
-export class AppComponent implements OnInit {
+export class AppComponent {
     title: string = 'LXD WebUI';
 
     constructor(private appConfig: AppConfig,
@@ -47,10 +48,6 @@ export class AppComponent implements OnInit {
         modal.defaultViewContainer = viewContainer;
         appConfig.onChangeConfig.subscribe(e => this.checkLxdConnection());
         this.checkLxdConnection();
-    }
-
-    ngOnInit() {
-        this.router.navigate(['/containers']);
     }
 
     checkLxdConnection() {
