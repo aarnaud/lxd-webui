@@ -35,8 +35,8 @@
             <td><i class="material-icons">{{image.auto_update ? 'check_box':'check_box_outline_blank'}}</i></td>
             <td><i class="material-icons">{{image.cached ? 'check_box':'check_box_outline_blank'}}</i></td>
             <td><i class="material-icons">{{image.public ? 'check_box':'check_box_outline_blank'}}</i></td>
-            <td>{{image.size}}</td>
-            <td>{{image.last_used_at}}</td>
+            <td>{{image.size | lxdFileSize}}</td>
+            <td>{{image.last_used_at | amDateFormat:'DD/MM/Y HH:mm:ss'}}</td>
         </tr>
         </tbody>
     </table>

@@ -5,10 +5,13 @@ import {ImagesService} from '../../services/images.service';
 import {AppConfig} from '../../services/config.service';
 import {ToastyService} from 'ng2-toasty/ng2-toasty';
 import {Observable} from 'rxjs/Observable';
+import {DateFormatPipe} from 'angular2-moment';
+import {FileSizeFormatPipe} from '../../filters/fileSize';
 
 @Component({
     selector: 'lxd-images',
-    templateUrl: 'assets/templates/images.component.html'
+    templateUrl: 'assets/templates/images.component.html',
+    pipes: [DateFormatPipe, FileSizeFormatPipe]
 })
 export class ImagesComponent implements OnInit {
     public images: Image[];

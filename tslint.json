@@ -18,7 +18,7 @@
     "no-forward-ref" :true,
     "use-life-cycle-interface": true,
     "use-pipe-transform-interface": true,
-    "pipe-naming": [true, "camelCase", "sg"],
+    "pipe-naming": [true, "camelCase", "lxd"],
     "component-class-suffix": true,
     "directive-class-suffix": true,
     "member-access": false,
