@@ -38,7 +38,7 @@
                     <td>{{container.created_at}}</td>
                     <td><i class="material-icons">{{container.stateful ? 'check_box':'check_box_outline_blank'}}</i></td>
                     <td><i class="material-icons">{{container.ephemeral ? 'check_box':'check_box_outline_blank'}}</i></td>
-                    <td><label class="label" [ngClass]="{'label-success': isRunning(container), 'label-danger': isStopped(container), 'label-warning': (!isRunning(container)&&!isStopped(container))}">{{container.status}}</label></td>
+                    <td><label class="label" [ngClass]="{'label-success': container.isRunning(), 'label-danger': container.isStopped(), 'label-warning': (!container.isRunning()&&!container.isStopped())}">{{container.status}}</label></td>
                 </tr>
                 </tbody>
             </table>
