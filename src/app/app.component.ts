@@ -11,6 +11,7 @@ import {AppConfig} from './services/config.service';
 import {DialogRef} from 'angular2-modal/angular2-modal';
 import {ImagesComponent} from './components/container/images.component';
 import {ProfilesComponent} from './components/container/profiles.component';
+import {ImagesService} from './services/images.service';
 
 
 @Component({
@@ -24,7 +25,8 @@ import {ProfilesComponent} from './components/container/profiles.component';
     ],
     providers: [
         HTTP_PROVIDERS,
-        ContainerService
+        ContainerService,
+        ImagesService
     ]
 })
 

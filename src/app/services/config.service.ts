@@ -6,7 +6,8 @@ import {Observable} from 'rxjs/Observable';
 export class AppConfig {
     @Output() onChangeConfig = new EventEmitter();
     private _lxdServerUrl: string;
-    private _apiVersion = '1.0';  // URL to web api
+    private _lxdBaseUrl: string;
+    private _apiVersion = '1.0';
 
     constructor(private http: Http) {
         // Get LXD Server URL in localstorage
@@ -19,27 +20,43 @@ export class AppConfig {
         }
     }
 
+    public checkLxdConnection(): Observable<any> {
+        return this.http.get(`${this.lxdBaseUrl}`)
+            .map((res: Response) => this.checkLxdApiResponse(res))
+            .catch(this.handleError);
+    }
+
     get lxdServerUrl(): string {
         return this._lxdServerUrl;
     }
 
     set lxdServerUrl(value: string) {
         this._lxdServerUrl = value;
-        this.onChangeConfig.emit('change');
+        this.generateBaseUrl();
     }
 
-    get LXDServer(){
+    get lxdServer() {
         return this._lxdServerUrl.split('/')[2];
     }
 
-    get LXDProtocol(){
+    get lxdProtocol() {
         return this._lxdServerUrl.split('/')[0] + '//';
     }
 
-    public checkLxdConnection(): Observable<any> {
-        return this.http.get(`${this.LXDProtocol}${this.LXDServer}/${this._apiVersion}`)
-            .map((res: Response) => this.checkLxdApiResponse(res))
-            .catch(this.handleError);
+    get apiVersion() {
+        return this._apiVersion;
+    }
+
+    get lxdBaseUrl() {
+        if (!this._lxdBaseUrl) {
+            this.generateBaseUrl();
+        }
+        return this._lxdBaseUrl;
+    }
+
+    private generateBaseUrl() {
+        this._lxdBaseUrl = `${this.lxdProtocol}${this.lxdServer}/${this.apiVersion}`;
+        this.onChangeConfig.emit('change');
     }
 
     private handleError(error: Response): Observable<string> {

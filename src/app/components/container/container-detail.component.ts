@@ -132,12 +132,4 @@ export class ContainerDetailComponent implements OnActivate {
             theme: 'material'
         };
     }
-
-    public isRunning(container: Container): boolean {
-        return (container.status === 'Running');
-    }
-
-    public isStopped(container: Container): boolean {
-        return (container.status === 'Stopped');
-    }
 }

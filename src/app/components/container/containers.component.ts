@@ -11,7 +11,6 @@ import {ToastyService} from 'ng2-toasty/ng2-toasty';
     templateUrl: 'assets/templates/containers.component.html'
 })
 export class ContainersComponent implements OnInit {
-    public title = 'LXD WebUI';
     public containers: Container[];
     selectedContainer: Container;
 
@@ -36,14 +35,6 @@ export class ContainersComponent implements OnInit {
                 forkJoin.subscribe((containers: Container[]) => this.containers = containers);
             },
             err => this.toastyService.error(this.getToastyOptions(err)));
-    }
-
-    public isRunning(container: Container): boolean {
-        return (container.status === 'Running');
-    }
-
-    public isStopped(container: Container): boolean {
-        return (container.status === 'Stopped');
     }
 
     getToastyOptions(message: string = '', title: string = '') {
