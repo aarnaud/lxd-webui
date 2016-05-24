@@ -23,7 +23,7 @@ npm run build:prod
 npm run server:prod # Not for production, just for test build
 ````
 
-Resulat in `build` directory
+Result in `build` directory
 
 ### to build electon application with deb package
 
@@ -39,4 +39,4 @@ npm run build:electron:prod
 npm run package:electron:linux
 ````
 
-Resulat in `dist` directory
+Result in `dist` directory
