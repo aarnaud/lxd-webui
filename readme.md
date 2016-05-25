@@ -27,11 +27,12 @@ lxc config set core.https_address [::]:8443
 lxc config set core.https_allowed_origin "*" # SECURITY WARNING: prefer to restrict with lxd-webui url 
 lxc config set core.https_allowed_methods "GET, POST, PUT, DELETE, OPTIONS"
 lxc config set core.https_allowed_headers "Content-Type"
+sudo service lxd restart # sometimes is required
 ```
 
 ### Accept self-sign server certificate 
 
-Go on LXD server url (https://127.0.0.1:8443) with your browser.
+Go on LXD server url (example: https://127.0.0.1:8443) with your browser.
 
 ### Generate x509 certificate for browser authentification
 
