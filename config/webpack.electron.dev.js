@@ -21,6 +21,7 @@ const HOST = process.env.HOST || '0.0.0.0';
 const PORT = process.env.PORT || 8907;
 const METADATA = {
   title: 'LXD-WebUI',
+  description: 'LXD WebUI is a frontend to manage the containers and images of LXD server. This web interface is like "LXC web panel" but for LXD',
   baseUrl: '/',
   host: HOST,
   port: PORT,
