@@ -26,7 +26,9 @@ export class ContainersComponent implements OnInit {
     }
 
     onSelect(container: Container) {
-        this.router.navigate(['container', container.name]);
+        // TODO: Break with @angular/router 2.0.0-rc.2 => wait 3.0.0 documentation
+        //this.router.navigate(['container', container.name ]);
+        this.router.navigateByUrl('/container/'+container.name)
     }
 
     public getContainers(): void {
