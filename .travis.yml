@@ -1,11 +1,9 @@
 language: node_js
 node_js:
+  - "node"
+  - "6"
   - "5"
-  - "5.1"
   - "4"
-  - "4.2"
-  - "4.1"
-  - "4.0"
 
 sudo: true
 
@@ -42,4 +40,4 @@ deploy:
     - dist/lxd-webui.tar.gz
   on:
     tags: true
-    node_js: "5.1"
+    node_js: "node"
