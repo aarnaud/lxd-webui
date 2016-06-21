@@ -42,3 +42,4 @@ deploy:
     - dist/lxd-webui.tar.gz
   on:
     tags: true
+    node_js: "5.1"
