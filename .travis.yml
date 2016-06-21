@@ -25,9 +25,10 @@ script:
 
 before_deploy:
   - test $TRAVIS_TEST_RESULT = 0
-  - npm run package:webapp
   - npm run build:electron:prod
   - npm run package:electron:linux
+  - npm run build:prod
+  - npm run package:webapp
 
 deploy:
   provider: releases
