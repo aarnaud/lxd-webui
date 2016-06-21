@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {OnActivate, Router, RouteSegment} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 import {Container} from '../../models/container';
 import {ContainerService} from '../../services/container.service';
 import {ToastyService} from 'ng2-toasty/ng2-toasty';
@@ -11,16 +11,14 @@ declare var Terminal;
     selector: 'lxd-container-detail',
     templateUrl: 'assets/templates/container-detail.component.html'
 })
-export class ContainerDetailComponent implements OnActivate {
+export class ContainerDetailComponent {
     container: Container;
 
     constructor(private containerService: ContainerService,
-                private router: Router,
-                private toastyService: ToastyService) {
-    }
-
-    routerOnActivate(curr: RouteSegment): void {
-        let id = curr.getParam('id');
+                private route: ActivatedRoute,
+                private toastyService: ToastyService)
+    {
+        let id = this.route.snapshot.params['id'];
         this.containerService.getContainer(id)
             .subscribe(
                 container => this.container = container,
