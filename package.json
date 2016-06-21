@@ -27,6 +27,7 @@
     "build:dev": "webpack --config config/webpack.dev.js --progress --profile --colors --display-error-details --display-cached",
     "prebuild:prod": "npm run clean:build",
     "build:prod": "webpack --config config/webpack.prod.js  --progress --profile --colors --display-error-details --display-cached --bail",
+    "package:webapp": "mkdir -p dist && tar -C ./build -czvf dist/lxd-webui.tar.gz .",
     "build:github": "webpack --config config/webpack.github.js  --progress --profile --colors --display-error-details --display-cached --bail",
     "prebuild:electron:dev": "npm run clean:build",
     "build:electron:dev": "webpack --config config/webpack.electron.dev.js --progress --profile --colors --display-error-details --display-cached",
