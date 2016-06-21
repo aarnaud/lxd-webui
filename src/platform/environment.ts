@@ -37,7 +37,7 @@ if ('production' === ENV) {
         return compiler;
       },
       deps: [PLATFORM_DIRECTIVES, PLATFORM_PIPES]
-    },
+    }
     // custom providers in production
   ];
 
@@ -47,7 +47,7 @@ if ('production' === ENV) {
 
   // Development
   PROVIDERS = [
-    ...PROVIDERS,
+    ...PROVIDERS
     // custom providers in development
   ];
 

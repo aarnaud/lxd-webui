@@ -6,6 +6,7 @@ import {ToastyService} from 'ng2-toasty/ng2-toasty';
 
 // FIXME: stop typescript error
 declare var Terminal;
+const ROUTE_PARAM_NAME = 'id';
 
 @Component({
     selector: 'lxd-container-detail',
@@ -16,9 +17,8 @@ export class ContainerDetailComponent {
 
     constructor(private containerService: ContainerService,
                 private route: ActivatedRoute,
-                private toastyService: ToastyService)
-    {
-        let id = this.route.snapshot.params['id'];
+                private toastyService: ToastyService) {
+        let id = this.route.snapshot.params[ROUTE_PARAM_NAME];
         this.containerService.getContainer(id)
             .subscribe(
                 container => this.container = container,

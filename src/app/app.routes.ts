@@ -10,11 +10,11 @@ export const routes: RouterConfig = [
     {path: 'container/:id',  component: ContainerDetailComponent},
     {path: 'images',  component: ImagesComponent},
     {path: 'profiles',  component: ProfilesComponent},
-    { path: '**',    component: ContainersComponent },
-
+    { path: '**',    component: ContainersComponent }
 ];
 
-// Example asyncRoutes is needed for our webpack-toolkit to allow us to resolve the component correctly
+// Example asyncRoutes is needed for our webpack-toolkit
+// to allow us to resolve the component correctly
 // export const asyncRoutes = {
 //     'About': require('es6-promise-loader!./about')
 // };
