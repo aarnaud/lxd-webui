@@ -35,6 +35,7 @@ deploy:
   provider: releases
   api_key:
     secure: G5g6c6/wQhKAjUf0kz4xiGr65Vq6KapobeonBFtvWSpavYtFvZQ8qz/AJ3tT+crPVgjpkoffsaONkXoeCGvQXEgJXqWLuT/M6ys8FzxiwnZVWncxVe6AVZSyqnrd9HiZFTsN1Qq2lJhjBi7WcGdjcxVtxyOqsgFT2dIjDm0LxEhnpr1dkijjBsBP5eRCC/bdd2c3tN3iUmGoNGEuQvE7txQCLZUISINizfBQReLX9V9BGRX6pSsMNk2XhTZ2FMCZpwZkEmk8GD9lBwqXXkMUwxtaA1cLvibANbNS8zAknNBc1AM1suoVOYZgAKjddRdj3xHFoElidWtuKlEnANKAmmTbCOb2XvR45V7gyXCyvi0SNgNWS+dQ85CepmcK6E5Tw3fvOT9o+/wElhplISVQhoMQ8lypv6S1BJ5VJi0Xo6R89rjDn/+t6xidMjGR9/HAWDgkB4MhqCl/Z4emkKDfCq0PJtN38njTbgUb4wfLTXQ29NuehI+rsK/p2jp/1z41kI/nIsqy7daXi6yIbjV2DY2SnQG3iUwn3v7DtHM1HmjHhVIXHVvMZ6KGCN7COOMMzBK7ZbtMaC6XRGN0mUwVm9CAbdRjA1so33SHgvIrvTXjkFPN3Z85+YLWF9CQC0/3AvUa+ZeLPrzaNcsDent8FnFoS7b6HzUwhloaC0fiSOg=
+  skip_cleanup: true
   file:
     - dist/lxd-webui.tar.gz
     - dist/lxd-webui-.*-amd64.deb
