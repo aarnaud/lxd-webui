@@ -25,7 +25,7 @@ lxc config set core.https_address [::]:8443
 
 ```bash
 lxc config set core.https_allowed_origin "*" # SECURITY WARNING: prefer to restrict with lxd-webui url 
-lxc config set core.https_allowed_methods "GET, POST, PUT, DELETE, OPTIONS"
+lxc config set core.https_allowed_methods "GET, POST, PUT, PATCH, DELETE, OPTIONS"
 lxc config set core.https_allowed_headers "Content-Type"
 ```
 

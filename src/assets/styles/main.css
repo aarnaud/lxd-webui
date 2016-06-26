@@ -178,3 +178,12 @@ ul.image-alias {
     width: 100%;
     padding-left: 2.9%;
 }
+
+.hidden-checkbox {
+    visibility: hidden;
+    position: absolute;
+}
+
+.label-checkbox {
+    cursor: pointer;
+}

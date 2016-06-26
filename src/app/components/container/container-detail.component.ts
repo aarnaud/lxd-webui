@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Container} from '../../models/container';
 import {ContainerService} from '../../services/container.service';
 import {ToastyService} from 'ng2-toasty/ng2-toasty';
@@ -17,6 +17,7 @@ export class ContainerDetailComponent {
 
     constructor(private containerService: ContainerService,
                 private route: ActivatedRoute,
+                private router: Router,
                 private toastyService: ToastyService) {
         let id = this.route.snapshot.params[ROUTE_PARAM_NAME];
         this.containerService.getContainer(id)
@@ -122,6 +123,9 @@ export class ContainerDetailComponent {
     deleteAction() {
         this.containerService.delete(this.container.name).subscribe(
             res => {
+                setTimeout(() => {
+                    this.router.navigate([ '/containers' ]);
+                }, 500);
             },
             err => this.toastyService.error(this.getToastyOptions(err))
         );

@@ -81,6 +81,12 @@ export class ContainerService {
             .catch(this.handleError);
     }
 
+    public create(data: any): Observable<Operation> {
+        return this.http.post(`${this.conf.lxdBaseUrl}/containers`, data)
+            .map((res: Response) => ((res.json() as LxdResponse).metadata as Operation))
+            .catch(this.handleError);
+    }
+
     private _getContainer(url: string): Observable<Container> {
         return this.http.get(`${this.conf.lxdServerUrl}${url}`)
             .map((res: Response) => new Container((res.json() as LxdResponse).metadata))

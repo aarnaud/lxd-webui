@@ -3,6 +3,13 @@ export interface ImageAlias {
     description: string;
 }
 
+export interface ImageProperties {
+    architecture: string;
+    description: string;
+    os: string;
+    release: string;
+}
+
 export class Image {
     aliases: ImageAlias[];
     architecture: string;
@@ -10,7 +17,7 @@ export class Image {
     cached: boolean;
     fingerprint: string;
     filename: string;
-    properties: any;
+    properties: ImageProperties;
     update_source: any;
     public: boolean;
     size: number;
