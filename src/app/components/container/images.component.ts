@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewContainerRef} from '@angular/core';
 import {Router} from '@angular/router';
 import {Image} from '../../models/image';
 import {ImagesService} from '../../services/images.service';
@@ -8,9 +8,15 @@ import {Observable} from 'rxjs/Observable';
 import {DateFormatPipe} from 'angular2-moment';
 import {FileSizeFormatPipe} from '../../filters/fileSize';
 import {ContainerService} from '../../services/container.service';
+import {Modal, BS_MODAL_PROVIDERS} from 'angular2-modal/plugins/bootstrap';
+import {DialogRef} from 'angular2-modal/angular2-modal';
+import {
+    ModalAddContainerComponent, ModalAddContainerData
+} from './modal-add-container.components';
 
 @Component({
     selector: 'lxd-images',
+    viewProviders: [...BS_MODAL_PROVIDERS],
     templateUrl: 'assets/templates/images.component.html',
     pipes: [DateFormatPipe, FileSizeFormatPipe]
 })
@@ -26,7 +32,9 @@ export class ImagesComponent implements OnInit {
                 private router: Router,
                 private imagesService: ImagesService,
                 private containerService: ContainerService,
-                private toastyService: ToastyService) {
+                private toastyService: ToastyService,
+                public modal: Modal, viewContainer: ViewContainerRef) {
+        modal.defaultViewContainer = viewContainer;
         conf.onChangeConfig.subscribe( e => this.getImages() );
     }
 
@@ -68,18 +76,28 @@ export class ImagesComponent implements OnInit {
         );
     }
 
-    launchAction(image: Image, name: string) {
+    launchAction(image: Image) {
         let data = {
-            'name': name,
+            'name': '',
             'source': {
                 'type': 'image',
                 'fingerprint': image.fingerprint
             }
         };
-        this.containerService.create(data).subscribe(
-            operation => this.waitOperation(operation.id),
-            err => this.toastyService.error(this.getToastyOptions(err))
-        );
+        this.modal.open(
+            ModalAddContainerComponent,
+            new ModalAddContainerData(image, data)
+        )
+            .then((dialog: DialogRef<any>) => {
+                dialog.result.then((result) => {
+                    if (result) {
+                        this.containerService.create(data).subscribe(
+                            operation => this.waitOperation(operation.id),
+                            err => this.toastyService.error(this.getToastyOptions(err))
+                        );
+                    }
+                });
+        });
     }
 
     deleteAction(image: Image) {
